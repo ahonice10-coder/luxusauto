@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard Administrateur - VELOCE</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#333535",
+                    "background": "#121414",
+                    "inverse-primary": "#004ced",
+                    "secondary": "#c8c6c5",
+                    "on-tertiary": "#303030",
+                    "error-container": "#93000a",
+                    "outline-variant": "#434656",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "surface": "#121414",
+                    "primary-container": "#0052ff",
+                    "on-primary-container": "#dfe3ff",
+                    "inverse-on-surface": "#2f3131",
+                    "surface-variant": "#333535",
+                    "surface-dim": "#121414",
+                    "on-surface": "#e2e2e2",
+                    "error": "#ffb4ab",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "inverse-surface": "#e2e2e2",
+                    "primary-fixed": "#dde1ff",
+                    "tertiary-fixed": "#e4e2e1",
+                    "on-secondary-container": "#b7b5b4",
+                    "on-surface-variant": "#c3c5d9",
+                    "surface-container-low": "#1a1c1c",
+                    "on-tertiary-container": "#e7e5e4",
+                    "on-error": "#690005",
+                    "on-secondary": "#313030",
+                    "surface-tint": "#b7c4ff",
+                    "surface-bright": "#37393a",
+                    "on-primary-fixed-variant": "#0038b6",
+                    "on-tertiary-fixed-variant": "#474746",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-container-high": "#282a2b",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-error-container": "#ffdad6",
+                    "primary": "#b7c4ff",
+                    "surface-container-lowest": "#0c0f0f",
+                    "secondary-container": "#474746",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-primary": "#002682",
+                    "on-secondary-fixed-variant": "#474746",
+                    "outline": "#8d90a2",
+                    "on-primary-fixed": "#001452",
+                    "tertiary-container": "#676666",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "surface-container": "#1e2020",
+                    "tertiary": "#c8c6c5",
+                    "on-background": "#e2e2e2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "stack-md": "24px",
+                    "stack-sm": "8px",
+                    "unit": "8px",
+                    "margin-desktop": "48px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "stack-lg": "64px"
+            },
+            "fontFamily": {
+                    "label-caps": ["JetBrains Mono"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Custom scrollbar for a sleeker look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121414; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #434656; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8d90a2; 
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row antialiased selection:bg-primary-container selection:text-white">
+<!-- Mobile Top App Bar (Visible only on small screens) -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile h-16 w-full fixed top-0 z-50 bg-surface/60 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-primary/15">
+<button class="text-primary active:scale-95 transition-transform hover:text-primary duration-200">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">VELOCE</div>
+<button class="active:scale-95 transition-transform">
+<img alt="User profile avatar" class="w-8 h-8 rounded-full object-cover" data-alt="A small, circular profile picture of a professional user in a dark, high-contrast setting. Cool lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT5R9SFom6fAizoPFQNzQcHPxaJWsWG8BeEennTpgqPtG2sStHsf2pmH7Wrg4A8tbmN1bGo7wVIh7SOPGlB9UXYWR3pUUfiBJKRQCuu3aQfOM9hxheOJTzpYm_UIVsI1Snxp27OOdptOrItZPFaNT36bhCtldO84iu7BMy6MDrL3zXVVrsVtYOyFJUNLyIylbJgXWL8_pu3hdwADqeNMaXR2Ei96N6-nQLTfMXoBQCkrOXFpi4mqZ1bQ"/>
+</button>
+</header>
+<!-- Desktop Navigation Drawer -->
+<aside class="hidden md:flex flex-col py-6 gap-2 h-full w-80 fixed left-0 top-0 z-[60] bg-surface-container-high border-r border-outline-variant shadow-2xl shadow-black">
+<!-- Profile Header -->
+<div class="px-6 pb-6 border-b border-outline-variant/30 mb-4 flex flex-col gap-2 left_align">
+<div class="flex items-center gap-4">
+<img alt="User avatar" class="w-12 h-12 rounded-full object-cover border-2 border-primary-container" data-alt="A high-quality close-up portrait of an executive, subtly lit with electric blue edge lighting against a dark studio background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJYPDDwQadGmQoffayqgDX3OzdUQaXRZ4f1bHTD_mOc9aIqEdHSmNnj8XoiefJyaCnO_ynMwi4mbI7QXAuyjM76dHTVIA8J6Esrs0PKMvLhP7wfnW7RjZR63a99NxfUSRUZu7ZwvSzSVfQlpC0i9i3HQs9nd3blWIWtrUu9NPYt0cAi4-h65kFt8rol9xKgVVBD8TJFD7p7TRkN0iEhExsmh7Fy7_JYmzgXr4SLABBuKEzAMJNuGqWuQ"/>
+<div>
+<h2 class="font-body-md text-body-md text-primary font-bold">Alexander Rossi</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Premium Member</p>
+</div>
+</div>
+<div class="inline-flex items-center gap-1 bg-surface-container-highest rounded px-2 py-1 w-fit mt-2">
+<span class="material-symbols-outlined text-[14px] text-primary">verified</span>
+<span class="font-label-caps text-[10px] text-primary uppercase">Verified</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-1 flex-1 font-body-md text-body-md">
+<!-- Inactive -->
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant mx-2 px-4 py-3 rounded-lg hover:bg-surface-variant transition-all active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">storefront</span>
+                Marketplace
+            </a>
+<!-- Inactive -->
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant mx-2 px-4 py-3 rounded-lg hover:bg-surface-variant transition-all active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                Reservations
+            </a>
+<!-- Active (Matches Intent: Admin Dashboard) -->
+<a class="flex items-center gap-4 bg-primary-container text-on-primary-container rounded-lg mx-2 px-4 py-3 font-bold active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard_customize</span>
+                Admin Panel
+            </a>
+<!-- Inactive -->
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant mx-2 px-4 py-3 rounded-lg hover:bg-surface-variant transition-all active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">notifications</span>
+                Notifications
+            </a>
+<!-- Inactive -->
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant mx-2 px-4 py-3 rounded-lg hover:bg-surface-variant transition-all active:translate-x-1 transition-transform mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+<!-- Inactive -->
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant mx-2 px-4 py-3 rounded-lg hover:bg-surface-variant transition-all active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-80 pt-20 md:pt-0 p-margin-mobile md:p-margin-desktop flex flex-col gap-stack-lg max-w-[1600px] w-full">
+<!-- Page Header -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Dashboard Administrateur</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Vue d'ensemble et gestion de la plateforme VELOCE.</p>
+</div>
+<button class="bg-primary-container text-on-primary-container hover:shadow-[0_0_20px_rgba(0,82,255,0.4)] transition-all duration-300 rounded px-6 py-3 flex items-center gap-2" onclick="document.getElementById('add-vehicle-panel').classList.toggle('hidden')">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-caps text-label-caps uppercase">Ajouter un véhicule</span>
+</button>
+</header>
+<!-- Hidden / Toggleable Add Vehicle Panel -->
+<section class="hidden bg-surface-container-high/80 backdrop-blur-xl border border-outline-variant/30 rounded-xl p-6 md:p-8 shadow-[0_20px_40px_rgba(0,82,255,0.05)] transition-all" id="add-vehicle-panel">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 border-b border-surface-container-highest pb-4">Nouveau Véhicule</h2>
+<form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Media Upload -->
+<div class="col-span-1 md:col-span-2 lg:col-span-1 bg-surface-container border border-dashed border-outline-variant rounded-lg p-8 flex flex-col items-center justify-center text-center gap-4 min-h-[250px] hover:border-primary-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">photo_camera</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface">Glissez photos/vidéos ici</p>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-2">Haute résolution requise</p>
+</div>
+</div>
+<!-- Info Fields -->
+<div class="col-span-1 lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Marque &amp; Modèle</label>
+<input class="bg-background border border-outline-variant rounded p-3 text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none font-body-md transition-colors" placeholder="ex: Porsche 911 GT3" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Catégorie</label>
+<select class="bg-background border border-outline-variant rounded p-3 text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none font-body-md appearance-none">
+<option value="neuf">Neuf</option>
+<option value="occasion">Occasion</option>
+</select>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Description Rapide</label>
+<textarea class="bg-background border border-outline-variant rounded p-3 text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none font-body-md h-24 resize-none" placeholder="Caractéristiques principales..."></textarea>
+</div>
+<div class="md:col-span-2 flex justify-end mt-2">
+<button class="bg-surface-bright border border-outline-variant text-on-surface hover:bg-surface-container-highest transition-colors rounded px-6 py-2 font-label-caps uppercase mr-4" type="button">Annuler</button>
+<button class="bg-primary-container text-on-primary-container hover:shadow-[0_0_15px_rgba(0,82,255,0.4)] transition-all rounded px-6 py-2 font-label-caps uppercase" type="button">Publier</button>
+</div>
+</div>
+</form>
+</section>
+<!-- Bento Grid Layout for Dashboard Data -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-stack-md">
+<!-- Section: Véhicules Postés -->
+<section class="lg:col-span-2 bg-surface-container-high/60 backdrop-blur-lg border border-outline-variant/20 rounded-xl p-6 flex flex-col h-[500px]">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">directions_car</span>
+                        Véhicules en Ligne
+                    </h2>
+<span class="bg-background px-3 py-1 rounded-full font-label-caps text-label-caps text-primary border border-primary/30">Total: 42</span>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 space-y-4">
+<!-- Vehicle Item -->
+<div class="bg-background/50 border border-outline-variant/30 rounded-lg p-4 flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-20 h-14 bg-cover bg-center rounded" data-alt="A sleek, dark grey sports car photographed in a modern, concrete studio setting with dramatic spot lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvmzFeb0I0-u2nprJxDd1gyjWku75jVp3H_9deyPItywmVeLNodNXAnQJV09jhk0JSz6B_0vunA1y0BjpqNYWnBWhpRPZcOlTkThh3114Medy2jZtl3OzHfisSrfX0G4cN2q6kjQxd4wS9k2R_LjzV_cdutyDR6P5amIuzwCuxla-6qyspDY1PJcTR9k5CAl_4bR3pZDyinj4yqKqJPwWd8qGCEIfS8viZNP6J0goqqWNq33DVJrbYlg')"></div>
+<div>
+<h3 class="font-body-md font-bold text-on-surface">Aston Martin Vantage</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">Neuf • V8 4.0L</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-2" title="Supprimer">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<!-- Vehicle Item -->
+<div class="bg-background/50 border border-outline-variant/30 rounded-lg p-4 flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-20 h-14 bg-cover bg-center rounded" data-alt="A bright red Italian supercar captured at night under sharp streetlights, emphasizing its aerodynamic curves." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBoPoWPH4onysmnEDbmoWXLmxnFoMxlyxpbXsWzFLkUNM5xmYYOgcd1nAmU3hj0LPx1LIIE3QzjEaH2R4WCnJc42w1lHjaCLc2JZwXWZ7vGCP4PioioQpY6kBdZ5lWC0B75VmD4JFVSkZzVndBxowQMBcuZbHgzVV8s6VO4_NJkCym-RstW6QH6qdk-2sgk7juilxNXvn-0vVZEUVfPwSQNUeMp9plfVi872i1WlWhJaLbHd5LFUOlPPA')"></div>
+<div>
+<h3 class="font-body-md font-bold text-on-surface">Ferrari F8 Tributo</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">Occasion • 5,200 km</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-2" title="Supprimer">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section: Gestion des Utilisateurs -->
+<section class="lg:col-span-1 bg-surface-container-high/60 backdrop-blur-lg border border-outline-variant/20 rounded-xl p-6 flex flex-col h-[500px]">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">group</span>
+                    Utilisateurs
+                </h2>
+<div class="flex-1 overflow-y-auto pr-2 space-y-3">
+<!-- User Item -->
+<div class="bg-background/50 border border-outline-variant/30 rounded-lg p-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold">JD</div>
+<div>
+<p class="font-body-md text-sm text-on-surface">Jean Dupont</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">Client Premium</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors" title="Bannir/Supprimer">
+<span class="material-symbols-outlined text-sm">person_remove</span>
+</button>
+</div>
+<!-- User Item -->
+<div class="bg-background/50 border border-outline-variant/30 rounded-lg p-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-secondary font-bold">ML</div>
+<div>
+<p class="font-body-md text-sm text-on-surface">Marie Laurent</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">Standard</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors" title="Bannir/Supprimer">
+<span class="material-symbols-outlined text-sm">person_remove</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section: Réservations Globales -->
+<section class="lg:col-span-3 bg-surface-container-high/60 backdrop-blur-lg border border-outline-variant/20 rounded-xl p-6">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">event_available</span>
+                        Réservations Globales
+                    </h2>
+<button class="text-primary hover:text-on-primary-container transition-colors font-label-caps text-label-caps uppercase">Voir tout</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/30">
+<th class="py-3 font-label-caps text-label-caps text-on-surface-variant uppercase font-normal">Client</th>
+<th class="py-3 font-label-caps text-label-caps text-on-surface-variant uppercase font-normal">Véhicule</th>
+<th class="py-3 font-label-caps text-label-caps text-on-surface-variant uppercase font-normal">Date de Réservation</th>
+<th class="py-3 font-label-caps text-label-caps text-on-surface-variant uppercase font-normal text-right">Statut</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-sm">
+<tr class="border-b border-surface-container-highest hover:bg-surface-variant/30 transition-colors">
+<td class="py-4 text-on-surface font-medium">Marc V.</td>
+<td class="py-4 text-secondary">Porsche 911 Carrera S</td>
+<td class="py-4 text-secondary font-label-caps">12 NOV 2024</td>
+<td class="py-4 text-right">
+<span class="inline-block px-2 py-1 rounded bg-primary-container/20 text-primary border border-primary/30 font-label-caps text-[10px] uppercase">Confirmé</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-variant/30 transition-colors">
+<td class="py-4 text-on-surface font-medium">Sophie L.</td>
+<td class="py-4 text-secondary">Audi RS6 Avant</td>
+<td class="py-4 text-secondary font-label-caps">14 NOV 2024</td>
+<td class="py-4 text-right">
+<span class="inline-block px-2 py-1 rounded bg-surface-container-highest text-secondary border border-outline-variant/50 font-label-caps text-[10px] uppercase">En attente</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+</body></html>

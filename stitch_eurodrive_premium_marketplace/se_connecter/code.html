@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VELOCE - Connexion</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#333535",
+                        "background": "#121414",
+                        "inverse-primary": "#004ced",
+                        "secondary": "#c8c6c5",
+                        "on-tertiary": "#303030",
+                        "error-container": "#93000a",
+                        "outline-variant": "#434656",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "surface": "#121414",
+                        "primary-container": "#0052ff",
+                        "on-primary-container": "#dfe3ff",
+                        "inverse-on-surface": "#2f3131",
+                        "surface-variant": "#333535",
+                        "surface-dim": "#121414",
+                        "on-surface": "#e2e2e2",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "inverse-surface": "#e2e2e2",
+                        "primary-fixed": "#dde1ff",
+                        "tertiary-fixed": "#e4e2e1",
+                        "on-secondary-container": "#b7b5b4",
+                        "on-surface-variant": "#c3c5d9",
+                        "surface-container-low": "#1a1c1c",
+                        "on-tertiary-container": "#e7e5e4",
+                        "on-error": "#690005",
+                        "on-secondary": "#313030",
+                        "surface-tint": "#b7c4ff",
+                        "surface-bright": "#37393a",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-container-high": "#282a2b",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#b7c4ff",
+                        "surface-container-lowest": "#0c0f0f",
+                        "secondary-container": "#474746",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-primary": "#002682",
+                        "on-secondary-fixed-variant": "#474746",
+                        "outline": "#8d90a2",
+                        "on-primary-fixed": "#001452",
+                        "tertiary-container": "#676666",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-container": "#1e2020",
+                        "tertiary": "#c8c6c5",
+                        "on-background": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "stack-md": "24px",
+                        "stack-sm": "8px",
+                        "unit": "8px",
+                        "margin-desktop": "48px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "64px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .glass-panel {
+            background: rgba(38, 38, 38, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-shadow {
+            box-shadow: 0px 20px 40px rgba(0, 82, 255, 0.15);
+        }
+        .input-focus-ring:focus-within {
+            border-color: theme('colors.primary-container');
+            box-shadow: 0 0 0 1px theme('colors.primary-container');
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex items-center justify-center relative overflow-hidden bg-background text-on-background">
+<!-- Abstract Background Element -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-container rounded-full mix-blend-screen filter blur-[128px] opacity-20"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-secondary-container rounded-full mix-blend-screen filter blur-[128px] opacity-10"></div>
+</div>
+<!-- Login Container -->
+<main class="relative z-10 w-full max-w-md px-margin-mobile md:px-0">
+<!-- Brand Header -->
+<div class="text-center mb-stack-md">
+<h1 class="font-display-lg text-display-lg text-primary tracking-tighter">VELOCE</h1>
+<p class="font-label-caps text-label-caps text-secondary mt-stack-sm opacity-60">SECURE ACCESS</p>
+</div>
+<!-- Glassmorphism Form Card -->
+<div class="glass-panel glow-shadow rounded-xl p-8 transition-all duration-300">
+<h2 class="font-headline-md text-headline-md mb-stack-md text-on-surface">Connexion</h2>
+<form action="#" class="space-y-6" method="POST">
+<!-- Email Input -->
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant block" for="email">EMAIL</label>
+<div class="relative input-focus-ring rounded border border-outline-variant bg-surface transition-colors duration-200">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-[20px]">mail</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 bg-transparent border-none text-on-surface focus:ring-0 font-body-md text-body-md placeholder-outline-variant" id="email" name="email" placeholder="nom@example.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps text-on-surface-variant block" for="password">MOT DE PASSE</label>
+<a class="font-label-caps text-label-caps text-primary hover:text-primary-fixed transition-colors" href="#">OUBLIÉ?</a>
+</div>
+<div class="relative input-focus-ring rounded border border-outline-variant bg-surface transition-colors duration-200">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-[20px]">lock</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 bg-transparent border-none text-on-surface focus:ring-0 font-body-md text-body-md placeholder-outline-variant" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full flex justify-center py-3 px-4 rounded bg-primary-container text-on-primary-container font-label-caps text-label-caps hover:bg-inverse-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-container focus:ring-offset-background transition-colors duration-200 relative overflow-hidden group" type="submit">
+<span class="relative z-10 flex items-center gap-2">
+                        SE CONNECTER
+                        <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</span>
+<div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</button>
+</form>
+<!-- Registration Link -->
+<div class="mt-8 text-center border-t border-white/10 pt-6">
+<p class="font-body-md text-body-md text-secondary">
+                    Nouveau sur VELOCE? 
+                    <a class="text-primary hover:text-primary-fixed font-semibold ml-1 transition-colors" href="#">Créer un compte</a>
+</p>
+</div>
+</div>
+</main>
+<!-- Suppressed Navigation Shells (Transactional/Login Page) -->
+<!-- TopAppBar, BottomNavBar, and Drawer are intentionally omitted for focused login flow -->
+</body></html>

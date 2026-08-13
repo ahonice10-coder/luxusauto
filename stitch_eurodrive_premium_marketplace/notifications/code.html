@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Veloce - Notifications</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#333535",
+                        "background": "#121414",
+                        "inverse-primary": "#004ced",
+                        "secondary": "#c8c6c5",
+                        "on-tertiary": "#303030",
+                        "error-container": "#93000a",
+                        "outline-variant": "#434656",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "surface": "#121414",
+                        "primary-container": "#0052ff",
+                        "on-primary-container": "#dfe3ff",
+                        "inverse-on-surface": "#2f3131",
+                        "surface-variant": "#333535",
+                        "surface-dim": "#121414",
+                        "on-surface": "#e2e2e2",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "inverse-surface": "#e2e2e2",
+                        "primary-fixed": "#dde1ff",
+                        "tertiary-fixed": "#e4e2e1",
+                        "on-secondary-container": "#b7b5b4",
+                        "on-surface-variant": "#c3c5d9",
+                        "surface-container-low": "#1a1c1c",
+                        "on-tertiary-container": "#e7e5e4",
+                        "on-error": "#690005",
+                        "on-secondary": "#313030",
+                        "surface-tint": "#b7c4ff",
+                        "surface-bright": "#37393a",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-container-high": "#282a2b",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#b7c4ff",
+                        "surface-container-lowest": "#0c0f0f",
+                        "secondary-container": "#474746",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-primary": "#002682",
+                        "on-secondary-fixed-variant": "#474746",
+                        "outline": "#8d90a2",
+                        "on-primary-fixed": "#001452",
+                        "tertiary-container": "#676666",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-container": "#1e2020",
+                        "tertiary": "#c8c6c5",
+                        "on-background": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "stack-md": "24px",
+                        "stack-sm": "8px",
+                        "unit": "8px",
+                        "margin-desktop": "48px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "64px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 dark:bg-surface/60 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-primary/15 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 transition-all duration-300">
+<button class="active:scale-95 transition-transform flex items-center justify-center p-2 rounded-full hover:bg-white/5">
+<span class="material-symbols-outlined text-primary dark:text-primary hover:text-primary transition-colors duration-200">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary uppercase">VELOCE</h1>
+<button class="active:scale-95 transition-transform flex items-center justify-center w-8 h-8 rounded-full overflow-hidden border border-outline-variant hover:border-primary duration-200">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A sleek, high-contrast headshot of a European man wearing minimalist dark clothing, set against a dark, moody background with subtle electric blue lighting accents to evoke a premium, modern automotive aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwUTXO-8IfjN74DR339mE2lZ-IqHeJDi_MB1Dy4WiYU2bXTEI7ciUlyw7HXk-NYS7OueRnBMrQ4_8VEPSIPBHuQJKJOAtuTDaDGczimsLu-EEOyibff6qCsChgyfolFcX2u17AXtfqqXk65e9gdUOa22vKEGb5ERrg91DrbVUgK3qHB-xzHi8h-RHAi6rFk82KyHkzaIongWoZ3WMNn4qT_GywQ-90mR5_k8_QH1VEtrvvskREMefMnQ"/>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-[104px] pb-[104px] md:pb-stack-lg px-margin-mobile md:px-margin-desktop max-w-[800px] w-full mx-auto flex flex-col gap-stack-md relative z-10">
+<!-- Page Header -->
+<div class="flex items-end justify-between border-b border-surface-container-highest pb-4 mb-4">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface">Notifications</h2>
+<p class="font-body-md text-body-md text-secondary mt-2">Mises à jour et alertes système</p>
+</div>
+<button class="font-label-caps text-label-caps text-primary hover:text-primary-fixed uppercase tracking-widest transition-colors duration-200 group flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] group-hover:rotate-12 transition-transform">done_all</span>
+                Tout marquer comme lu
+            </button>
+</div>
+<!-- Notifications List -->
+<div class="flex flex-col gap-4">
+<!-- Notification Item: Unread / Action Required -->
+<div class="relative group bg-[#262626]/80 backdrop-blur-[12px] border border-white/10 rounded-xl p-6 transition-all duration-300 hover:bg-[#333535]/90 hover:border-primary/40 overflow-hidden flex gap-5 items-start">
+<!-- Unread Indicator (Level 3 Glow) -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary-container shadow-[0_0_20px_rgba(0,82,255,0.6)]"></div>
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary mt-1 border border-primary-container/30">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-grow flex flex-col gap-2">
+<div class="flex justify-between items-start gap-4">
+<h3 class="font-headline-md text-[20px] leading-tight text-on-surface">Réservation Confirmée</h3>
+<span class="font-label-caps text-label-caps text-secondary whitespace-nowrap opacity-70">Il y a 10 min</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        Votre réservation pour la <span class="text-on-surface font-medium">BMW M4 Competition</span> a été confirmée. Veuillez procéder au virement bancaire pour finaliser l'acquisition de ce véhicule d'exception.
+                    </p>
+<div class="mt-4 flex gap-3">
+<button class="bg-primary-container text-white font-label-caps text-label-caps px-6 py-3 rounded-lg uppercase tracking-widest hover:bg-inverse-primary transition-colors shadow-[0_4px_14px_rgba(0,82,255,0.3)] hover:shadow-[0_6px_20px_rgba(0,82,255,0.4)] active:scale-95 duration-200">
+                            Procéder au paiement
+                        </button>
+<button class="border border-outline-variant text-on-surface font-label-caps text-label-caps px-6 py-3 rounded-lg uppercase tracking-widest hover:bg-surface-variant transition-colors active:scale-95 duration-200">
+                            Voir détails
+                        </button>
+</div>
+</div>
+</div>
+<!-- Notification Item: Read / Info -->
+<div class="relative group bg-[#262626]/40 backdrop-blur-[12px] border border-white/5 rounded-xl p-6 transition-all duration-300 hover:bg-[#262626]/60 flex gap-5 items-start opacity-80 hover:opacity-100">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-secondary mt-1">
+<span class="material-symbols-outlined">directions_car</span>
+</div>
+<div class="flex-grow flex flex-col gap-2">
+<div class="flex justify-between items-start gap-4">
+<h3 class="font-headline-md text-[20px] leading-tight text-secondary">Nouveau Véhicule Disponible</h3>
+<span class="font-label-caps text-label-caps text-secondary whitespace-nowrap opacity-50">Hier, 14:30</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant/70 leading-relaxed">
+                        Un véhicule correspondant à vos critères de recherche de performance (Porsche 911 GT3) vient d'être ajouté au showroom exclusif.
+                    </p>
+</div>
+</div>
+<!-- Notification Item: Read / System -->
+<div class="relative group bg-[#262626]/40 backdrop-blur-[12px] border border-white/5 rounded-xl p-6 transition-all duration-300 hover:bg-[#262626]/60 flex gap-5 items-start opacity-80 hover:opacity-100">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-secondary mt-1">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div class="flex-grow flex flex-col gap-2">
+<div class="flex justify-between items-start gap-4">
+<h3 class="font-headline-md text-[20px] leading-tight text-secondary">Profil Vérifié</h3>
+<span class="font-label-caps text-label-caps text-secondary whitespace-nowrap opacity-50">12 Nov 2024</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant/70 leading-relaxed">
+                        Vos documents d'identité ont été validés avec succès. Votre statut est désormais "Premium Member", vous donnant un accès prioritaire aux nouvelles arrivées.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface/80 dark:bg-surface/80 backdrop-blur-lg border-t border-white/10 shadow-[0_-10px_30px_rgba(0,82,255,0.1)] flex justify-around items-center h-20 pb-4 md:hidden">
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary gap-1 opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-200">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary gap-1 opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-200">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="font-label-caps text-label-caps">New</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary gap-1 opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-200">
+<span class="material-symbols-outlined">minor_crash</span>
+<span class="font-label-caps text-label-caps">Used</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary gap-1 opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-200">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-label-caps text-label-caps">Bookings</span>
+</button>
+<!-- Active Tab: Profile (closest semantic match for user notifications) -->
+<button class="flex flex-col items-center justify-center text-primary dark:text-primary gap-1 active:scale-90 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-label-caps text-primary">Profile</span>
+</button>
+</nav>
+</body></html>

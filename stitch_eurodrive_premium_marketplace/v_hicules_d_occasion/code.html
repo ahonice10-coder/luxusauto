@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Véhicules d'Occasion - VELOCE</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-highest": "#333535",
+                      "background": "#121414",
+                      "inverse-primary": "#004ced",
+                      "secondary": "#c8c6c5",
+                      "on-tertiary": "#303030",
+                      "error-container": "#93000a",
+                      "outline-variant": "#434656",
+                      "primary-fixed-dim": "#b7c4ff",
+                      "surface": "#121414",
+                      "primary-container": "#0052ff",
+                      "on-primary-container": "#dfe3ff",
+                      "inverse-on-surface": "#2f3131",
+                      "surface-variant": "#333535",
+                      "surface-dim": "#121414",
+                      "on-surface": "#e2e2e2",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed": "#1b1c1c",
+                      "inverse-surface": "#e2e2e2",
+                      "primary-fixed": "#dde1ff",
+                      "tertiary-fixed": "#e4e2e1",
+                      "on-secondary-container": "#b7b5b4",
+                      "on-surface-variant": "#c3c5d9",
+                      "surface-container-low": "#1a1c1c",
+                      "on-tertiary-container": "#e7e5e4",
+                      "on-error": "#690005",
+                      "on-secondary": "#313030",
+                      "surface-tint": "#b7c4ff",
+                      "surface-bright": "#37393a",
+                      "on-primary-fixed-variant": "#0038b6",
+                      "on-tertiary-fixed-variant": "#474746",
+                      "on-secondary-fixed": "#1c1b1b",
+                      "surface-container-high": "#282a2b",
+                      "secondary-fixed": "#e5e2e1",
+                      "on-error-container": "#ffdad6",
+                      "primary": "#b7c4ff",
+                      "surface-container-lowest": "#0c0f0f",
+                      "secondary-container": "#474746",
+                      "secondary-fixed-dim": "#c8c6c5",
+                      "on-primary": "#002682",
+                      "on-secondary-fixed-variant": "#474746",
+                      "outline": "#8d90a2",
+                      "on-primary-fixed": "#001452",
+                      "tertiary-container": "#676666",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "surface-container": "#1e2020",
+                      "tertiary": "#c8c6c5",
+                      "on-background": "#e2e2e2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1280px",
+                      "stack-md": "24px",
+                      "stack-sm": "8px",
+                      "unit": "8px",
+                      "margin-desktop": "48px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "stack-lg": "64px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md min-h-screen selection:bg-primary-container selection:text-on-primary-container pb-24 md:pb-0 flex flex-col">
+<!-- TopAppBar Component -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 dark:bg-surface/60 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-primary/15 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full">
+<!-- Leading Icon -->
+<button class="flex items-center justify-center p-2 -ml-2 rounded-full hover:bg-white/5 transition-colors active:scale-95 text-primary dark:text-primary hover:text-primary duration-200">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Headline / Brand -->
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary">VELOCE</span>
+</div>
+<!-- Trailing Avatar -->
+<button class="flex items-center justify-center rounded-full overflow-hidden w-8 h-8 border border-white/20 active:scale-95 transition-transform">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A close-up portrait of an elegant, professional individual looking confidently off-camera, illuminated by soft, cinematic studio lighting against a dark, moody background, reflecting the premium aesthetic of a high-end European automotive brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgaGNDGpoX90TmAniJEhvv6aWkrU56PqDIUlRHbJhhghYPAJPZrdEC4gLYl7ZeUz_LEB05WnqeVnVG_ZOjGv1b41YDJMlD2M3pzam9mIH0vofvIohM89B8ntHevz8MM-FsP0ZznafRlnMTb1Sjc6p27-KCjzS8Om09UWB2hc5EVS2MGTWIu5XDR5HkKStmu3ZilrZEl-6jxIYqn41X01b1LGIhVNclABejFopclXb2voSLxP8wwiOrkA"/>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow pt-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Hero / Section Title -->
+<section class="mb-stack-lg flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="max-w-2xl">
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight mb-2 md:mb-4">Véhicules d'Occasion</h1>
+<p class="font-body-lg text-body-lg text-secondary">L'excellence de l'ingénierie européenne, rigoureusement inspectée et garantie. Découvrez notre collection de véhicules certifiés prêts pour une seconde vie de performances.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high border border-outline-variant hover:border-primary/50 hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-[18px] text-secondary group-hover:text-primary transition-colors">tune</span>
+<span class="font-label-caps text-label-caps text-secondary group-hover:text-primary transition-colors">Filtres</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high border border-outline-variant hover:border-primary/50 hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-[18px] text-secondary group-hover:text-primary transition-colors">sort</span>
+<span class="font-label-caps text-label-caps text-secondary group-hover:text-primary transition-colors">Trier par</span>
+</button>
+</div>
+</section>
+<!-- Bento Grid for Vehicles -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter mb-stack-lg">
+<!-- Featured Vehicle (Spans 8 cols on large screens) -->
+<article class="lg:col-span-8 group relative rounded-xl overflow-hidden bg-surface-container/40 backdrop-blur-md border border-white/5 hover:border-primary/30 transition-all duration-300 flex flex-col shadow-lg shadow-black/50 hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative h-[400px] lg:h-[500px] w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A sleek, dark grey sports car photographed in a premium, dimly lit showroom environment. The vehicle sits on a highly polished, reflective black floor. Dramatic, high-contrast overhead studio lighting highlights the precise curves and aerodynamic engineering of the car's body. The overall mood is sophisticated, exclusive, and evocative of European automotive excellence, with deep black tones and subtle electric blue ambient lighting accents in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuN265-mRGRZZ9HUmkD1E0jdiUxYHsmlJ-mzoAayoxFRyEIOUiMHhcjZzTSSlmY6WUEmHYdxUTzI74JPCjRRm6xJkFKI-WZjDlqK5F0xMbUSmYsRe0YIZ4leu0PtQXh_vcD6h3nJcG_wIG40P5aXLJctADEGLvdQLwXDpUu-OZqyrgXQWivoazwkWhINSTZSRe_osOwcXcZjMBlW5jDIu1V4XBpQR_wCfaKR94iM8yyYKvYbaDMfll8Q"/>
+<!-- Gradient Overlay for text legibility if needed, though we use glassmorphism below -->
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent"></div>
+<!-- Badge -->
+<div class="absolute top-6 left-6 bg-background/90 backdrop-blur-md border border-primary/20 px-4 py-1.5 rounded-full flex items-center gap-2 shadow-2xl">
+<span class="material-symbols-outlined text-primary text-[16px] animate-pulse">verified</span>
+<span class="font-label-caps text-label-caps text-primary tracking-widest">Occasion certifiée</span>
+</div>
+<!-- Floating Specs Footer on large card -->
+<div class="absolute bottom-6 left-6 right-6 p-6 rounded-xl bg-surface-container-highest/60 backdrop-blur-xl border border-white/10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Porsche 911 Carrera 4S</h2>
+<div class="flex items-center gap-4">
+<span class="font-body-md text-body-md text-secondary">Année 2021</span>
+<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+<span class="font-body-md text-body-md text-secondary">32 500 km</span>
+<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+<span class="font-body-md text-body-md text-secondary">Automatique PDK</span>
+</div>
+</div>
+<div class="flex flex-col items-start md:items-end w-full md:w-auto">
+<span class="font-display-lg text-headline-lg md:text-display-lg text-on-surface mb-3 md:mb-4">128 500 €</span>
+<button class="w-full md:w-auto bg-primary hover:bg-inverse-primary text-on-primary px-8 py-3 rounded-lg font-label-caps text-label-caps transition-all active:scale-95 shadow-[0_0_15px_rgba(0,82,255,0.3)] hover:shadow-[0_0_25px_rgba(0,82,255,0.5)]">
+                                Commander
+                            </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Standard Vehicle Card 1 (Spans 4 cols on large screens) -->
+<article class="lg:col-span-4 group relative rounded-xl overflow-hidden bg-surface-container/40 backdrop-blur-md border border-white/5 hover:border-primary/30 transition-all duration-300 flex flex-col shadow-lg shadow-black/50 hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative h-[250px] w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="An elegant, deep blue luxury sedan positioned against a minimalist, dark architectural concrete wall. The scene is shot at night with soft, diffused white light outlining the vehicle's silhouette. The aesthetic is clean, modern, and high-end, focusing on the car's dynamic edge and engineering quality. The environment relies on a sophisticated palette of deep shadows and precise highlights to convey absolute trust and premium status." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4EbZkhvdXY54wu_PLqgUE-ufgrbXpw2h5la1sMaFVVYWnz3KP7z9ob49FhtA5Z8eWHQxAIqf56o1OlURgSXrsENcMvhorgT6JhCxGpqhtpPeBWEsGlTb3I_1YZ5zt_LkIdWjzMKcCJFbiiIaYH6qG12YEPWGHrfPkq5P35OJKbXUUuWZNXZyznLrQxbVjFAldceB5q_KTkX6YRNGQCoX5FZS9NHB-1qEyqv4Qm0W3KWGZmEV1uVCjQQ"/>
+<div class="absolute top-4 left-4 bg-background/90 backdrop-blur-md border border-primary/20 px-3 py-1 rounded-full flex items-center gap-1.5 shadow-xl">
+<span class="material-symbols-outlined text-primary text-[14px]">verified</span>
+<span class="font-label-caps text-label-caps text-primary">Occasion certifiée</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow bg-surface-container-high/20">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Audi RS6 Avant</h3>
+<p class="font-body-md text-body-md text-secondary mb-6">Année 2020</p>
+<div class="grid grid-cols-2 gap-4 mb-6 flex-grow">
+<div>
+<p class="font-label-caps text-label-caps text-outline mb-1">Kilométrage</p>
+<p class="font-body-md text-body-md text-on-surface">45 200 km</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-outline mb-1">Énergie</p>
+<p class="font-body-md text-body-md text-on-surface">Essence (V8)</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/30">
+<p class="font-headline-md text-headline-md text-on-surface font-bold">115 000 €</p>
+<button class="bg-surface border border-outline-variant hover:border-primary text-on-surface hover:text-primary px-4 py-2 rounded-lg font-label-caps text-label-caps transition-all active:scale-95 group-hover:bg-primary/10">
+                            Commander
+                        </button>
+</div>
+</div>
+</article>
+<!-- Standard Vehicle Card 2 (Spans 4 cols on large screens) -->
+<article class="lg:col-span-4 group relative rounded-xl overflow-hidden bg-surface-container/40 backdrop-blur-md border border-white/5 hover:border-primary/30 transition-all duration-300 flex flex-col shadow-lg shadow-black/50 hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative h-[250px] w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A high-performance luxury SUV in matte black, captured in a cutting-edge, dark mode studio setting. The floor is composed of textured dark tiles, and sharp, angular streaks of cool white light reflect off the vehicle's angular bodywork. The atmosphere is powerful and minimalist, utilizing tonal layering of deep greys and blacks to create a sense of depth and robust engineering. The visual style embodies exclusivity and modern European design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUbGYJCWKn3_7fR8H3siBp09uT7AdueQhysM0wHbMRifvSZhVmfEV5fs4wZatUfePUs7vW-AGmlIqCGbG6wBF0jHXgNtSLJPZyxJjIycTuHtHwljcVboX_ge1S4Ga9NGUTNLPybd0dzpyGCpQUIMSjjnCDynaTBIydgieyty8ZpGsszDfBgWuguXbgiN5FAm44K68esO8V3Ek8x85klBl61WphtBmhGXwieocCx83cjnA4nzCUcrZHgw"/>
+<div class="absolute top-4 left-4 bg-background/90 backdrop-blur-md border border-primary/20 px-3 py-1 rounded-full flex items-center gap-1.5 shadow-xl">
+<span class="material-symbols-outlined text-primary text-[14px]">verified</span>
+<span class="font-label-caps text-label-caps text-primary">Occasion certifiée</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow bg-surface-container-high/20">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Mercedes-Benz G63 AMG</h3>
+<p class="font-body-md text-body-md text-secondary mb-6">Année 2022</p>
+<div class="grid grid-cols-2 gap-4 mb-6 flex-grow">
+<div>
+<p class="font-label-caps text-label-caps text-outline mb-1">Kilométrage</p>
+<p class="font-body-md text-body-md text-on-surface">18 000 km</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-outline mb-1">Énergie</p>
+<p class="font-body-md text-body-md text-on-surface">Essence (V8 Bi-Turbo)</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/30">
+<p class="font-headline-md text-headline-md text-on-surface font-bold">185 900 €</p>
+<button class="bg-surface border border-outline-variant hover:border-primary text-on-surface hover:text-primary px-4 py-2 rounded-lg font-label-caps text-label-caps transition-all active:scale-95 group-hover:bg-primary/10">
+                            Commander
+                        </button>
+</div>
+</div>
+</article>
+<!-- Banner / Promotional Area (Spans 8 cols) -->
+<article class="lg:col-span-8 rounded-xl overflow-hidden bg-surface-container-high border border-outline-variant/50 flex flex-col md:flex-row relative items-center justify-center p-8 lg:p-12 shadow-lg shadow-black/30">
+<!-- Abstract background pattern via SVG placeholder -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" data-alt="Abstract, geometric automotive-inspired digital pattern. Dark background with subtle electric blue wireframe lines intersecting to form precise, aerodynamic shapes. The mood is high-tech, evoking German engineering precision and computational design in a minimalist night-mode aesthetic. High contrast, sharp edges." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCLvduQHxPTUL8dWC17HWdcT4ciq7y8IlVHgv4lBOjro1wAaf5OnMiLRmFj0tQ9iEesghWUm_1z-ePArlR0M9bPrsKvI5r8iAYmHyP5MUIFz7sDK1yKoua3jlquIwCQHUWJYiXcOGBY6kGM3JQcW9r6J-JIa7-ZzfClx96ZgXJfRQhtFkPn7DUPtHyWpG34XZ2RS60mry_JePQitOqSrisxamZ-u3L5IY_In4sAkemfX9oRAQEdWGk8cA')"></div>
+<div class="relative z-10 text-center max-w-lg">
+<span class="material-symbols-outlined text-primary text-[48px] mb-4">shield_with_heart</span>
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-4">La promesse VELOCE</h3>
+<p class="font-body-md text-body-md text-secondary mb-6">Chaque véhicule d'occasion est soumis à un contrôle rigoureux de 150 points par nos maîtres techniciens. Garantie de 24 mois incluse, pour une tranquillité d'esprit absolue.</p>
+<button class="inline-flex items-center gap-2 text-primary hover:text-on-primary-container font-label-caps text-label-caps transition-colors group">
+                        Découvrir notre processus d'inspection
+                        <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</article>
+</section>
+<!-- Pagination or Load More -->
+<div class="flex justify-center mb-stack-lg">
+<button class="border border-outline-variant hover:border-primary text-on-surface hover:text-primary bg-surface px-8 py-3 rounded-lg font-label-caps text-label-caps transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">autorenew</span>
+                Charger plus de véhicules
+            </button>
+</div>
+</main>
+<!-- BottomNavBar Component -->
+<!-- The "Destination" Rule & Responsive Pivot applied -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface/80 dark:bg-surface/80 backdrop-blur-lg border-t border-white/10 shadow-[0_-10px_30px_rgba(0,82,255,0.1)] flex justify-around items-center h-20 pb-4 w-full md:hidden">
+<!-- Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary gap-1 opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<!-- New (Inactive) -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary gap-1 opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="font-label-caps text-label-caps">New</span>
+</a>
+<!-- Used (Active) -> Maps semantically to "Véhicules d'Occasion" -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary gap-1 active:scale-90 duration-200 group" href="#">
+<!-- Active indicator dot -->
+<div class="absolute top-1 w-1 h-1 bg-primary rounded-full hidden group-active:block"></div>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">minor_crash</span>
+<span class="font-label-caps text-label-caps text-primary dark:text-primary">Used</span>
+</a>
+<!-- Bookings (Inactive) -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary gap-1 opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-label-caps text-label-caps">Bookings</span>
+</a>
+<!-- Profile (Inactive) -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary gap-1 opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</a>
+</nav>
+</body></html>
