@@ -10,8 +10,8 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="mt-8 border-t border-border bg-sidebar/60">
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-4 md:px-8 md:py-20">
+    <footer className="mt-8 border-t border-border bg-sidebar/60 pb-[calc(5.25rem+env(safe-area-inset-bottom))] md:pb-10">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:grid-cols-2 sm:px-5 md:gap-12 md:px-8 md:py-20 lg:grid-cols-4">
         <div className="md:pr-6">
           <Link to="/" className="text-xl font-semibold tracking-tight text-foreground">{SITE.name}</Link>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">{t('footer.tagline')}</p>
@@ -51,7 +51,7 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="mx-auto max-w-7xl px-5 pb-10 md:px-8">
+      <div className="mx-auto max-w-7xl px-4 pb-6 sm:px-5 md:px-8 md:pb-0">
         <Separator className="mb-6" />
         <p className="text-xs text-muted-foreground">
           © {year} {SITE.name}. {t('footer.rights')}

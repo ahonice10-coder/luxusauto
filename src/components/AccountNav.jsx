@@ -15,7 +15,7 @@ export function AccountNav() {
   ]
 
   return (
-    <nav className="mb-10 flex gap-1 overflow-x-auto border-b border-border" aria-label={t('user.mySpace')}>
+    <nav className="scrollbar-none mb-8 flex gap-1 overflow-x-auto overscroll-x-contain border-b border-border sm:mb-10" aria-label={t('user.mySpace')}>
       {links.map((link) => (
         <NavLink
           key={link.to}

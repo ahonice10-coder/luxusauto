@@ -31,7 +31,7 @@ export function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-border bg-sidebar md:flex">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-border bg-sidebar lg:flex">
         <div className="px-5 py-5">
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">{t('admin.kicker')}</p>
           <p className="mt-1 text-xl font-semibold tracking-tight">{SITE.name}</p>
@@ -85,21 +85,24 @@ export function AdminLayout() {
         </div>
       </aside>
 
-      <div className="md:pl-64">
-        <header className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-border bg-background/95 px-4 py-3 backdrop-blur-md md:px-8">
-          <div>
+      <div className="lg:pl-64">
+        <header className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b border-border bg-background/95 px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))] backdrop-blur-md sm:gap-4 md:px-8">
+          <div className="min-w-0">
             <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">{t('admin.kicker')}</p>
-            <h1 className="text-lg font-semibold">{title}</h1>
+            <h1 className="truncate text-base font-semibold sm:text-lg">{title}</h1>
           </div>
-          <LanguageSwitcher id="language-switcher-admin" />
+          <div className="shrink-0">
+            <LanguageSwitcher id="language-switcher-admin" compact />
+          </div>
         </header>
 
-        <nav className="flex gap-2 overflow-x-auto border-b border-border px-4 py-3 md:hidden">
+        <nav className="scrollbar-none flex gap-2 overflow-x-auto overscroll-x-contain border-b border-border px-4 py-3 lg:hidden">
           {adminLinks.map((link) => (
             <Button
               key={link.to}
               variant={location.pathname === link.to || (!link.end && location.pathname.startsWith(link.to)) ? 'secondary' : 'outline'}
               size="sm"
+              className="shrink-0"
               asChild
             >
               <NavLink to={link.to} end={link.end}>
@@ -110,7 +113,7 @@ export function AdminLayout() {
           ))}
         </nav>
 
-        <main id="main-content" className="px-4 py-8 md:px-8">
+        <main id="main-content" className="px-4 py-6 sm:py-8 md:px-8">
           <PageTransition>
             <Outlet />
           </PageTransition>

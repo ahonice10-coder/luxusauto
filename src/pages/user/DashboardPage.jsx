@@ -28,7 +28,7 @@ export default function DashboardPage() {
         description={t('user.spaceHint')}
       />
 
-      <div className="grid gap-5 sm:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         <Link to="/favorites" className="glass-panel p-6 transition hover:border-primary/40">
           <Heart className="mb-4 text-primary" size={20} />
           <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{t('nav.favorites')}</p>
@@ -59,12 +59,12 @@ export default function DashboardPage() {
         ) : (
           <div className="space-y-3">
             {mine.slice(0, 5).map((reservation) => (
-              <div key={reservation.id} className="flex items-center justify-between border border-border bg-card px-5 py-4">
-                <div>
-                  <p className="font-semibold text-foreground">#{reservation.id.slice(-4)}</p>
+              <div key={reservation.id} className="flex items-center justify-between gap-3 border border-border bg-card px-4 py-4 sm:px-5">
+                <div className="min-w-0">
+                  <p className="truncate font-semibold text-foreground">#{reservation.id.slice(-4)}</p>
                   <p className="mt-1 text-sm text-muted-foreground">{reservation.date}</p>
                 </div>
-                <span className="rounded bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-primary">{reservation.status}</span>
+                <span className="shrink-0 rounded bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-primary">{reservation.status}</span>
               </div>
             ))}
           </div>

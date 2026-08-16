@@ -40,7 +40,7 @@ export function VehicleCard({ vehicle }) {
             images={images}
             alt={vehicle.name}
             interval={3000}
-            className="h-64 w-full"
+            className="h-52 w-full sm:h-56 md:h-64"
           />
         </Link>
         <Button
@@ -60,9 +60,9 @@ export function VehicleCard({ vehicle }) {
       </div>
 
       <CardHeader className="pt-5">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <CardTitle className="text-lg">
+        <div className="flex min-w-0 items-start justify-between gap-3 sm:gap-4">
+          <div className="min-w-0">
+            <CardTitle className="text-base break-words sm:text-lg">
               <Link to={`/vehicle/${vehicle.id}`} className="hover:underline">{vehicle.name}</Link>
             </CardTitle>
             <p className="mt-1 text-sm text-muted-foreground">{vehicle.engine} • {vehicle.year}</p>
@@ -78,13 +78,13 @@ export function VehicleCard({ vehicle }) {
         <span>{vehicle.location}</span>
       </CardContent>
 
-      <CardFooter className="justify-between bg-transparent">
-        <Button variant="link" className="px-0" asChild>
+      <CardFooter className="flex-col items-stretch gap-3 bg-transparent sm:flex-row sm:items-center sm:justify-between">
+        <Button variant="link" className="justify-start px-0" asChild>
           <Link to={`/vehicle/${vehicle.id}`}>
             {t('vehicle.seeVehicle')} <ArrowRight />
           </Link>
         </Button>
-        <Button size="sm" asChild>
+        <Button size="sm" className="w-full sm:w-auto" asChild>
           <Link to={`/vehicle/${vehicle.id}`}>{t('vehicle.reserve')}</Link>
         </Button>
       </CardFooter>

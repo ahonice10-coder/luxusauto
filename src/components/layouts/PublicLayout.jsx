@@ -8,7 +8,7 @@ export function PublicLayout() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
-      <main id="main-content" className="pb-28 md:pb-0">
+      <main id="main-content">
         <PageTransition>
           <Outlet />
         </PageTransition>

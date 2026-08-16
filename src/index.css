@@ -106,6 +106,7 @@
     scroll-behavior: smooth;
     color-scheme: light;
     background: var(--background);
+    overflow-x: clip;
   }
 
   body {
@@ -113,8 +114,12 @@
     font-family: var(--font-sans);
     min-width: 320px;
     min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: clip;
     background-color: var(--background);
     background-image: radial-gradient(ellipse 90% 55% at 50% -10%, oklch(0.88 0.02 82 / 0.28), transparent 58%);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 
   ::selection {
@@ -147,13 +152,34 @@
   margin-inline: auto;
   width: 100%;
   max-width: 80rem;
-  padding: 4rem 1.25rem 5.5rem;
+  padding: 2.25rem 1rem 4rem;
+}
+
+@media (min-width: 640px) {
+  .page-shell {
+    padding: 3rem 1.5rem 5rem;
+  }
 }
 
 @media (min-width: 768px) {
   .page-shell {
+    padding: 4.5rem 2rem 6.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-shell {
     padding: 5.5rem 2rem 7rem;
   }
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
 
 .glass-panel {
@@ -167,9 +193,11 @@
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
 }
 
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 40px oklch(0.2 0.01 55 / 0.08);
+@media (hover: hover) and (pointer: fine) {
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px oklch(0.2 0.01 55 / 0.08);
+  }
 }
 
 .nav-link {

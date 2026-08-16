@@ -6,7 +6,7 @@ export const STORAGE_KEYS = {
   // notifications per user: call with userId -> luxusauto.notifications.<userId>
   notifications: (userId) => `luxusauto.notifications.${userId || "public"}`,
   contacts: "luxusauto.contacts",
-  language: "luxusauto.language",
+  language: "luxusauto.language.v2",
   favorites: (userId) => `luxusauto.favorites.${userId}`,
 };
 

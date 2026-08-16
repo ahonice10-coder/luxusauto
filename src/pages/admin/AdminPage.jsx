@@ -46,7 +46,7 @@ export default function AdminPage() {
       <div data-reveal className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{t('admin.live')}</p>
-          <h2 className="mt-2 text-3xl font-black text-foreground md:text-4xl">
+          <h2 className="mt-2 text-2xl font-black text-foreground sm:text-3xl md:text-4xl">
             {t('admin.welcome')}{user?.name ? `, ${user.name}` : ''}
           </h2>
           <p className="mt-2 text-muted-foreground">{t('admin.overviewHint')}</p>

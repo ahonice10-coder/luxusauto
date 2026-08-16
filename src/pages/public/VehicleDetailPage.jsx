@@ -104,22 +104,22 @@ export default function VehicleDetailPage() {
           images={getVehicleImages(vehicle)}
           alt={vehicle.name}
           interval={3000}
-          className="h-[380px] w-full md:h-[480px]"
+          className="h-56 w-full sm:h-72 md:h-[420px] lg:h-[480px]"
         />
       </Card>
 
-      <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
-        <div>
+      <div className="mt-8 grid gap-8 md:mt-12 md:grid-cols-2 md:items-start md:gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12">
+        <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
             <Badge variant="secondary">
               {vehicle.category === 'new' ? t('vehicle.newBadge') : t('vehicle.usedBadge')}
             </Badge>
             <span className="text-sm text-muted-foreground">{vehicle.brand}</span>
           </div>
-          <h1 className="mt-4 text-4xl font-black tracking-tight text-foreground md:text-5xl">{vehicle.name}</h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">{vehicle.description}</p>
+          <h1 className="mt-3 text-3xl font-black tracking-tight text-foreground sm:mt-4 sm:text-4xl md:text-5xl">{vehicle.name}</h1>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:mt-5 sm:text-base md:text-lg">{vehicle.description}</p>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          <div className="mt-8 grid gap-4 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
             <Card className="p-5">
               <Gauge className="mb-3" size={20} />
               <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{t('vehicle.power')}</p>
@@ -149,9 +149,9 @@ export default function VehicleDetailPage() {
         </div>
 
         <aside className="space-y-5 lg:sticky lg:top-28">
-          <Card className="p-7">
+          <Card className="p-5 sm:p-7">
             <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{t('vehicles.price')}</p>
-            <p className="mt-3 text-3xl font-semibold text-gold">{formatPrice(vehicle.price, locale)}</p>
+            <p className="mt-3 text-2xl font-semibold text-gold sm:text-3xl">{formatPrice(vehicle.price, locale)}</p>
             <p className="mt-2 text-sm text-muted-foreground">{t('vehicle.deposit')} : {formatPrice(deposit, locale)}</p>
             <Button type="button" onClick={handleOrder} className="mt-8 w-full" size="lg">
               <MessageCircle /> {t('vehicle.order')}
@@ -164,7 +164,7 @@ export default function VehicleDetailPage() {
             </Button>
           </Card>
 
-          <Card className="p-7">
+          <Card className="p-5 sm:p-7">
             <div className="flex items-center gap-2">
               <ShieldCheck size={18} /> <span className="text-xs font-medium uppercase tracking-[0.16em]">{t('vehicle.clientReview')}</span>
             </div>

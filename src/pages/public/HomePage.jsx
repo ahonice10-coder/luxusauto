@@ -48,25 +48,25 @@ export default function HomePage() {
     <div>
       <Seo title={t('seo.home')} description={t('seo.homeDesc')} />
 
-      <section className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24" data-reveal>
-        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
-          <div>
-            <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-foreground md:text-6xl md:leading-[1.05]">
+      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-5 sm:py-16 md:px-8 md:py-20 lg:py-24" data-reveal>
+        <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
+          <div className="min-w-0">
+            <h1 className="max-w-xl text-[2.15rem] font-semibold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl lg:leading-[1.05]">
               {SITE.name}
             </h1>
-            <h3 className="mt-4 max-w-xl text-xl font-medium tracking-tight text-muted-foreground md:text-2xl">
+            <h3 className="mt-3 max-w-xl text-lg font-medium tracking-tight text-muted-foreground sm:mt-4 sm:text-xl md:text-2xl">
               {t('home.title')}
             </h3>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
+            <p className="mt-4 max-w-md text-[0.95rem] leading-relaxed text-muted-foreground sm:mt-5 sm:text-base md:text-lg">
               {t('home.subtitle')}
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button size="lg" asChild>
+            <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row">
+              <Button size="lg" className="w-full sm:w-auto" asChild>
                 <Link to="/vehicles">
                   {t('home.browseVehicles')} <ArrowRight />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="outline" className="w-full sm:w-auto" asChild>
                 <Link to="/vehicles/new">{t('home.newVehicles')}</Link>
               </Button>
             </div>
@@ -75,14 +75,14 @@ export default function HomePage() {
             <SafeImage
               src={HOME_IMAGES.hero}
               alt={SITE.name}
-              className="aspect-[4/5] w-full rounded-none object-cover sm:aspect-[5/4] lg:aspect-[4/5]"
+              className="aspect-[16/10] w-full rounded-none object-cover sm:aspect-[5/4] lg:aspect-[4/5]"
             />
           </Card>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28" data-reveal>
-        <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-20 md:px-8 md:py-28" data-reveal>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 md:gap-10">
           <div>
             <CarFront className="mb-5 text-foreground" size={28} />
             <h3 className="text-xl font-semibold">{t('home.performance')}</h3>
@@ -101,11 +101,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-8 md:px-8 md:py-12" data-reveal>
+      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-5 md:px-8 md:py-12" data-reveal>
         <SectionHeader center title={t('home.dailyVehicle')} subtitle={t('home.simplicity')} />
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+        <div className="grid grid-cols-6 gap-x-3 gap-y-8 sm:gap-6 lg:grid-cols-5">
           {steps.map(([Icon, key], index) => (
-            <div key={key} className="flex flex-col items-center text-center">
+            <div
+              key={key}
+              className={[
+                'col-span-2 flex flex-col items-center text-center lg:col-span-1',
+                index === 3 ? 'col-start-2 lg:col-start-auto' : '',
+                index === 4 ? 'col-start-4 lg:col-start-auto' : '',
+              ].filter(Boolean).join(' ')}
+            >
               <span className="mb-4 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">0{index + 1}</span>
               <div className="mb-4 rounded-lg border bg-card p-3.5">
                 <Icon size={22} />
@@ -116,8 +123,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28" data-reveal>
-        <div className="grid gap-8 md:grid-cols-3">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-20 md:px-8 md:py-28" data-reveal>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:gap-8">
           {[
             ['inspection', 'home.inspection', 'home.inspectionDesc', 'home.inspectionAlt'],
             ['warranty', 'home.warranty', 'home.warrantyDesc', 'home.warrantyAlt'],
@@ -136,7 +143,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-8 md:px-8 md:py-12" data-reveal>
+      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-5 md:px-8 md:py-12" data-reveal>
         <SectionHeader
           title={t('home.ourSelection')}
           subtitle={t('home.exceptional')}
@@ -146,19 +153,19 @@ export default function HomePage() {
             </Button>
           )}
         />
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:gap-8">
           {featured.map((vehicle) => (
             <VehicleCard key={vehicle.id} vehicle={vehicle} />
           ))}
         </div>
-        <Button variant="ghost" className="mt-10 md:hidden" asChild>
+        <Button variant="ghost" className="mt-8 w-full sm:w-auto md:hidden" asChild>
           <Link to="/vehicles">{t('home.seeAll')}</Link>
         </Button>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28" data-reveal>
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-20 md:px-8 md:py-28" data-reveal>
         <SectionHeader center title={t('home.testimonials')} subtitle={t('home.customerReviews')} />
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:gap-8">
           {testimonials.map((testimonial) => (
             <Card key={testimonial.id}>
               <CardHeader>
@@ -187,13 +194,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 pb-24 pt-8 md:px-8 md:pb-32" data-reveal>
-        <Card className="flex flex-col items-start justify-between gap-8 p-6 md:flex-row md:items-center md:p-10">
+      <section className="mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-5 md:px-8 md:pb-32" data-reveal>
+        <Card className="flex flex-col items-stretch justify-between gap-6 p-5 sm:p-6 md:flex-row md:items-center md:gap-8 md:p-10">
           <div className="max-w-xl">
-            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">{t('home.faq')}</h2>
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">{t('home.faq')}</h2>
             <p className="mt-3 leading-relaxed text-muted-foreground">{t('home.findAnswers')}</p>
           </div>
-          <Button size="lg" asChild>
+          <Button size="lg" className="w-full shrink-0 md:w-auto" asChild>
             <Link to="/faq">
               {t('home.seeFaq')} <ArrowRight />
             </Link>

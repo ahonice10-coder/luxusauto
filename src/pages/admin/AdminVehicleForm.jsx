@@ -186,8 +186,8 @@ export default function AdminVehicleForm({ initialData = null, editingId: propEd
   return (
     <div data-reveal>
       <Seo title={t('admin.addNewVehicle')} />
-      <div className="mt-8 rounded-2xl border border-border bg-card/60 p-8">
-        <h2 className="mb-6 text-2xl font-bold text-foreground">{editingId ? t('admin.editVehicle') : t('admin.addNewVehicle')}</h2>
+      <div className="mt-4 rounded-2xl border border-border bg-card/60 p-4 sm:mt-8 sm:p-6 md:p-8">
+        <h2 className="mb-6 text-xl font-bold text-foreground sm:text-2xl">{editingId ? t('admin.editVehicle') : t('admin.addNewVehicle')}</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <p className="mb-3 text-sm font-semibold text-foreground">{t('admin.vehicleMedia')} *</p>
@@ -217,7 +217,7 @@ export default function AdminVehicleForm({ initialData = null, editingId: propEd
                     />
                   </label>
                   {gallery.length ? (
-                    <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
+                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
                       {gallery.map((src, index) => (
                         <div key={`${src}-${index}`} className="relative">
                           <img src={src} alt="" className="h-24 w-full rounded-xl object-cover" />
@@ -297,7 +297,7 @@ export default function AdminVehicleForm({ initialData = null, editingId: propEd
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <div>
               <label htmlFor="admin-engine" className={labelClass}>{t('admin.engine')}</label>
               <input id="admin-engine" name="engine" value={form.engine} onChange={handleChange} className={fieldClass} />
@@ -323,7 +323,7 @@ export default function AdminVehicleForm({ initialData = null, editingId: propEd
 
           <div>
             <label htmlFor="admin-spec" className={labelClass}>{t('admin.specs')}</label>
-            <div className="mb-3 flex gap-2">
+            <div className="mb-3 flex flex-col gap-2 sm:flex-row">
               <input
                 id="admin-spec"
                 value={specInput}
@@ -336,7 +336,7 @@ export default function AdminVehicleForm({ initialData = null, editingId: propEd
                 }}
                 className={`flex-1 ${fieldClass}`}
               />
-              <button type="button" onClick={addSpec} className="rounded-xl bg-primary px-4 py-3 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground">{t('common.save')}</button>
+              <button type="button" onClick={addSpec} className="rounded-xl bg-primary px-4 py-3 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground sm:shrink-0">{t('common.save')}</button>
             </div>
             <div className="flex flex-wrap gap-2">
               {form.specs.map((spec, index) => (
@@ -350,7 +350,7 @@ export default function AdminVehicleForm({ initialData = null, editingId: propEd
             </div>
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row">
             <button type="submit" className="flex-1 rounded-xl bg-primary px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground">
               {editingId ? t('admin.update') : t('admin.publish')}
             </button>

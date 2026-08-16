@@ -46,12 +46,12 @@ export default function LoginPage() {
   const unlock = () => setLockAutofill(false)
 
   return (
-    <div className="flex min-h-[80vh] items-center justify-center px-5 py-16">
+    <div className="flex min-h-[80dvh] items-center justify-center px-4 py-10 sm:px-5 sm:py-16">
       <Seo title={t('seo.login')} />
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">LuxusAuto</p>
-          <CardTitle className="mt-2 text-3xl">{t('nav.login')}</CardTitle>
+          <CardTitle className="mt-2 text-2xl sm:text-3xl">{t('nav.login')}</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} autoComplete="off" className="space-y-5">

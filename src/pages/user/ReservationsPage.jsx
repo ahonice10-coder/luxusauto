@@ -37,16 +37,16 @@ export default function ReservationsPage() {
             return (
               <div key={reservation.id} className="glass-panel p-5 md:p-6">
                 <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-                  <div className="flex gap-5">
-                    <SafeImage src={vehicle?.image} alt={vehicle?.name || ''} className="h-24 w-32 rounded object-cover" />
-                    <div>
+                  <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:gap-5">
+                    <SafeImage src={vehicle?.image} alt={vehicle?.name || ''} className="h-40 w-full rounded object-cover sm:h-24 sm:w-32 sm:shrink-0" />
+                    <div className="min-w-0">
                       <p className="text-[11px] uppercase tracking-[0.16em] text-primary">{reservation.status}</p>
-                      <h2 className="mt-2 text-xl font-bold text-foreground">{vehicle?.name || reservation.vehicleId}</h2>
+                      <h2 className="mt-2 text-lg font-bold text-foreground sm:text-xl">{vehicle?.name || reservation.vehicleId}</h2>
                       <p className="mt-1 text-sm text-muted-foreground">{t('user.date')} : {reservation.date}</p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-3">
-                    <Link to={`/vehicle/${reservation.vehicleId}`} className="rounded border border-border px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground hover:text-primary">{t('vehicle.seeVehicle')}</Link>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                    <Link to={`/vehicle/${reservation.vehicleId}`} className="rounded border border-border px-4 py-2 text-center text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground hover:text-primary">{t('vehicle.seeVehicle')}</Link>
                     {canCancel ? (
                       <button
                         type="button"

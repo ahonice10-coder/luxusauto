@@ -39,11 +39,11 @@ export default function AdminLoginPage() {
   const unlock = () => setLockAutofill(false)
 
   return (
-    <div className="flex min-h-[80vh] items-center justify-center px-4 py-20">
+    <div className="flex min-h-[80dvh] items-center justify-center px-4 py-10 sm:py-20">
       <Seo title={t('seo.admin')} />
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-3xl">{t('auth.adminLogin')}</CardTitle>
+          <CardTitle className="text-2xl sm:text-3xl">{t('auth.adminLogin')}</CardTitle>
           <CardDescription>{t('auth.accessDashboard')}</CardDescription>
         </CardHeader>
         <CardContent>

@@ -31,12 +31,12 @@ export function Navbar() {
     }`
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-5 md:h-[72px] md:px-8">
-        <div className="flex items-center gap-3">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 pt-[env(safe-area-inset-top)] backdrop-blur-md">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-2 px-4 sm:h-16 sm:gap-4 sm:px-5 md:h-[72px] md:px-8">
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Menu">
+              <Button variant="ghost" size="icon" className="shrink-0 lg:hidden" aria-label="Menu">
                 <Menu />
               </Button>
             </SheetTrigger>
@@ -45,9 +45,6 @@ export function Navbar() {
                 <SheetTitle>{SITE.name}</SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-1 px-4" aria-label="Mobile">
-                <div className="mb-3 sm:hidden">
-                  <LanguageSwitcher id="language-switcher-mobile" />
-                </div>
                 <Button variant="ghost" className="justify-start" asChild>
                   <Link to="/" onClick={() => setMobileMenuOpen(false)}>{t('nav.home')}</Link>
                 </Button>
@@ -96,12 +93,12 @@ export function Navbar() {
               </nav>
             </SheetContent>
           </Sheet>
-          <Link to="/" className="font-display text-lg font-semibold tracking-tight text-foreground md:text-xl">
+          <Link to="/" className="min-w-0 truncate font-display text-base font-semibold tracking-tight text-foreground sm:text-lg md:text-xl">
             {SITE.name}
           </Link>
         </div>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Principal">
+        <nav className="hidden items-center gap-6 lg:flex xl:gap-8" aria-label="Principal">
           <NavLink to="/" end className={navLinkClass}>{t('nav.home')}</NavLink>
           <NavLink
             to="/vehicles"
@@ -115,16 +112,14 @@ export function Navbar() {
           <NavLink to="/contact" className={navLinkClass}>{t('nav.contact')}</NavLink>
         </nav>
 
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          <div className="hidden sm:block">
-            <LanguageSwitcher id="language-switcher-desktop" compact />
-          </div>
+        <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+          <LanguageSwitcher id="language-switcher-nav" compact />
           {!isAuthenticated ? (
             <>
               <Button variant="ghost" size="sm" className="hidden sm:inline-flex" asChild>
                 <Link to="/login">{t('nav.login')}</Link>
               </Button>
-              <Button size="sm" asChild>
+              <Button size="sm" className="hidden sm:inline-flex" asChild>
                 <Link to="/register">{t('nav.createAccount')}</Link>
               </Button>
             </>

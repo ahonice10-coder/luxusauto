@@ -26,7 +26,7 @@ export default function FavoritesPage() {
           action={<Link to="/vehicles" className="rounded bg-primary px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-primary-foreground">{t('home.browseVehicles')}</Link>}
         />
       ) : (
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3 md:gap-8">
           {favorites.map((vehicle) => (
             <VehicleCard key={vehicle.id} vehicle={vehicle} />
           ))}

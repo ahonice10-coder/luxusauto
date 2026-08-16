@@ -7,8 +7,8 @@ const LanguageContext = createContext(null)
 
 export function LanguageProvider({ children }) {
   const [language, setLanguageState] = useState(() => {
-    const saved = readStorage(STORAGE_KEYS.language, 'fr')
-    return SUPPORTED_LANGUAGES.includes(saved) ? saved : 'fr'
+    const saved = readStorage(STORAGE_KEYS.language, 'it')
+    return SUPPORTED_LANGUAGES.includes(saved) ? saved : 'it'
   })
 
   useEffect(() => {

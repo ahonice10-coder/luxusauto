@@ -23,7 +23,7 @@ export default function NotificationsPage() {
           {notifications.map((notification) => (
             <div
               key={notification.id}
-              className={`border p-6 ${notification.read ? 'border-border bg-card' : 'border-primary/30 bg-primary/5'}`}
+              className={`border p-4 sm:p-6 ${notification.read ? 'border-border bg-card' : 'border-primary/30 bg-primary/5'}`}
             >
               <button type="button" onClick={() => markAsRead(notification.id)} className="w-full text-left">
                 <div className="flex items-start justify-between gap-4">

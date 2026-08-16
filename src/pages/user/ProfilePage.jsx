@@ -31,7 +31,7 @@ export default function ProfilePage() {
       <div className="grid gap-5 md:grid-cols-2">
         <div className="border border-border bg-card px-6 py-6">
           <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{t('auth.email')}</p>
-          <p className="mt-3 text-lg font-semibold text-foreground">{user?.email}</p>
+          <p className="mt-3 break-all text-lg font-semibold text-foreground">{user?.email}</p>
         </div>
         <div className="border border-border bg-card px-6 py-6">
           <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{t('user.status')}</p>

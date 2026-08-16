@@ -10,8 +10,8 @@ export function AuthLayout() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-[72px] md:px-8">
-          <Link to="/" className="text-xl font-semibold tracking-tight text-foreground">{SITE.name}</Link>
+        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-5 md:h-[72px] md:px-8">
+          <Link to="/" className="min-w-0 truncate text-lg font-semibold tracking-tight text-foreground sm:text-xl">{SITE.name}</Link>
           <LanguageSwitcher id="language-switcher-auth" />
         </div>
       </header>

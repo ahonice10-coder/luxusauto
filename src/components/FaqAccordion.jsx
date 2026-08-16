@@ -15,11 +15,11 @@ export function FaqAccordion() {
   }))
 
   return (
-    <Accordion type="single" collapsible className="rounded-xl border bg-card px-4">
+    <Accordion type="single" collapsible className="rounded-xl border bg-card px-3 sm:px-4">
       {faqs.map((faq) => (
         <AccordionItem key={faq.id} value={`faq-${faq.id}`}>
-          <AccordionTrigger className="text-base">{faq.question}</AccordionTrigger>
-          <AccordionContent className="text-muted-foreground">{faq.answer}</AccordionContent>
+          <AccordionTrigger className="text-left text-sm sm:text-base">{faq.question}</AccordionTrigger>
+          <AccordionContent className="text-sm text-muted-foreground sm:text-base">{faq.answer}</AccordionContent>
         </AccordionItem>
       ))}
     </Accordion>

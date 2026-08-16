@@ -45,7 +45,7 @@ export default function ContactPage() {
     <div className="page-shell max-w-5xl">
       <Seo title={t('seo.contact')} description={t('contact.title')} />
       <PageHeader kicker={t('contact.kicker')} title={t('contact.title')} />
-      <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+      <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
         <div>
           <h2 className="text-xl font-semibold">{t('contact.details')}</h2>
           <ul className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground">
@@ -67,7 +67,7 @@ export default function ContactPage() {
             <Label htmlFor="contact-message">{t('contact.message')}</Label>
             <Textarea id="contact-message" name="message" value={form.message} onChange={handleChange} className="min-h-36" required />
           </div>
-          <Button type="submit" size="lg">{t('common.send')}</Button>
+          <Button type="submit" size="lg" className="w-full sm:w-auto">{t('common.send')}</Button>
         </form>
       </div>
     </div>

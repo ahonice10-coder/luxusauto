@@ -86,7 +86,7 @@ export default function VehiclesPage() {
         )}
       />
 
-      <div className="mb-10 grid gap-4 md:grid-cols-[1fr_14rem]">
+      <div className="mb-8 grid gap-3 sm:mb-10 sm:gap-4 md:grid-cols-[1fr_14rem]">
         <div>
           <label htmlFor="vehicle-search" className="sr-only">{t('common.search')}</label>
           <Input
@@ -129,7 +129,7 @@ export default function VehiclesPage() {
           )}
         />
       ) : (
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3 md:gap-8">
           {filteredVehicles.map((vehicle) => (
             <VehicleCard key={vehicle.id} vehicle={vehicle} />
           ))}
