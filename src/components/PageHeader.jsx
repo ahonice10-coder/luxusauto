@@ -11,10 +11,13 @@ export function PageHeader({ kicker, title, description, action }) {
   )
 }
 
-export function SectionHeader({ title, subtitle, action, center = false }) {
+export function SectionHeader({ kicker, title, subtitle, action, center = false }) {
   return (
     <div className={`mb-8 sm:mb-12 md:mb-16 ${center ? 'mx-auto max-w-2xl text-center' : 'flex flex-col gap-4 sm:gap-6 md:flex-row md:items-end md:justify-between'}`}>
       <div className={center ? '' : 'max-w-2xl min-w-0'}>
+        {kicker ? (
+          <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-gold">{kicker}</p>
+        ) : null}
         <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-5xl md:leading-tight">{title}</h2>
         {subtitle ? <h3 className="mt-2 text-base font-normal leading-snug text-muted-foreground sm:mt-3 sm:text-lg md:text-xl">{subtitle}</h3> : null}
       </div>

@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
-import { ArrowRight, ShieldCheck, Sparkles, CarFront, User, Heart, MessageCircle, CreditCard, Package, Star } from 'lucide-react'
+import { ArrowRight, ShieldCheck, Sparkles, CarFront, Heart, MessageCircle, CreditCard, KeyRound, Compass, ClipboardCheck, Timer, Star } from 'lucide-react'
 import { useVehicles } from '../../context/VehicleContext'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { VehicleCard } from '../../components/vehicle/VehicleCard'
@@ -44,12 +44,24 @@ export default function HomePage() {
     ][id - 1],
   }))
 
+  const pillars = [
+    { icon: CarFront, title: 'home.performance', desc: 'home.performanceDesc' },
+    { icon: ClipboardCheck, title: 'home.trust', desc: 'home.trustDesc' },
+    { icon: Sparkles, title: 'home.premium', desc: 'home.premiumDesc' },
+  ]
+
   const steps = [
-    [User, 'home.valet'],
-    [Heart, 'home.favorites'],
-    [MessageCircle, 'home.whatsapp'],
-    [CreditCard, 'home.buyOnline'],
-    [Package, 'home.pickup'],
+    { icon: Compass, title: 'home.valet', desc: 'home.valetDesc' },
+    { icon: Heart, title: 'home.favorites', desc: 'home.favoritesDesc' },
+    { icon: MessageCircle, title: 'home.whatsapp', desc: 'home.whatsappDesc' },
+    { icon: CreditCard, title: 'home.buyOnline', desc: 'home.buyOnlineDesc' },
+    { icon: KeyRound, title: 'home.pickup', desc: 'home.pickupDesc' },
+  ]
+
+  const promises = [
+    { image: 'inspection', icon: ClipboardCheck, title: 'home.inspection', desc: 'home.inspectionDesc', alt: 'home.inspectionAlt' },
+    { image: 'warranty', icon: ShieldCheck, title: 'home.warranty', desc: 'home.warrantyDesc', alt: 'home.warrantyAlt' },
+    { image: 'delivery', icon: Timer, title: 'home.delivery', desc: 'home.deliveryDesc', alt: 'home.deliveryAlt' },
   ]
 
   return (
@@ -90,45 +102,52 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-20 md:px-8 md:py-28" data-reveal>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 md:gap-10">
-          <div>
-            <CarFront className="mb-5 text-foreground" size={28} />
-            <h3 className="text-xl font-semibold">{t('home.performance')}</h3>
-            <p className="mt-3 leading-relaxed text-muted-foreground">{t('home.performanceDesc')}</p>
-          </div>
-          <div>
-            <ShieldCheck className="mb-5 text-foreground" size={28} />
-            <h3 className="text-xl font-semibold">{t('home.trust')}</h3>
-            <p className="mt-3 leading-relaxed text-muted-foreground">{t('home.trustDesc')}</p>
-          </div>
-          <div>
-            <Sparkles className="mb-5 text-foreground" size={28} />
-            <h3 className="text-xl font-semibold">{t('home.premium')}</h3>
-            <p className="mt-3 leading-relaxed text-muted-foreground">{t('home.premiumDesc')}</p>
-          </div>
+        <SectionHeader
+          kicker={t('home.pillarsKicker')}
+          title={t('home.pillarsTitle')}
+          subtitle={t('home.pillarsSubtitle')}
+        />
+        <div className="grid gap-4 md:grid-cols-3">
+          {pillars.map(({ icon: Icon, title, desc }, index) => (
+            <Card key={title} className="relative overflow-hidden p-6 sm:p-8">
+              <span className="pointer-events-none absolute right-4 top-3 font-display text-6xl font-semibold leading-none text-foreground/10">
+                0{index + 1}
+              </span>
+              <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-full bg-muted">
+                <Icon size={20} />
+              </div>
+              <h3 className="text-xl font-semibold tracking-tight">{t(title)}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{t(desc)}</p>
+            </Card>
+          ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-5 md:px-8 md:py-12" data-reveal>
-        <SectionHeader center title={t('home.dailyVehicle')} subtitle={t('home.simplicity')} />
-        <div className="grid grid-cols-6 gap-x-3 gap-y-8 sm:gap-6 lg:grid-cols-5">
-          {steps.map(([Icon, key], index) => (
-            <div
-              key={key}
-              className={[
-                'col-span-2 flex flex-col items-center text-center lg:col-span-1',
-                index === 3 ? 'col-start-2 lg:col-start-auto' : '',
-                index === 4 ? 'col-start-4 lg:col-start-auto' : '',
-              ].filter(Boolean).join(' ')}
-            >
-              <span className="mb-4 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">0{index + 1}</span>
-              <div className="mb-4 rounded-lg border bg-card p-3.5">
-                <Icon size={22} />
+      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-5 md:px-8 md:py-16" data-reveal>
+        <SectionHeader
+          kicker={t('home.journeyKicker')}
+          title={t('home.dailyVehicle')}
+          subtitle={t('home.simplicity')}
+        />
+        <ol className="relative grid gap-8 md:grid-cols-5 md:gap-4">
+          {steps.map(({ icon: Icon, title, desc }, index) => (
+            <li key={title} className="relative flex gap-4 md:flex-col md:gap-0">
+              {index < steps.length - 1 ? (
+                <span className="absolute left-[15px] top-8 hidden h-[calc(100%+2rem)] w-px bg-border md:left-5 md:top-5 md:block md:h-px md:w-[calc(100%+1rem)]" aria-hidden="true" />
+              ) : null}
+              <span className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-foreground text-[11px] font-semibold text-primary-foreground md:mb-5">
+                {index + 1}
+              </span>
+              <div className="min-w-0 pt-0.5 md:pt-0">
+                <div className="mb-3 hidden h-10 w-10 items-center justify-center rounded-lg bg-card md:flex">
+                  <Icon size={18} />
+                </div>
+                <p className="font-semibold tracking-tight">{t(title)}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{t(desc)}</p>
               </div>
-              <p className="max-w-[11rem] text-sm leading-snug">{t(key)}</p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8 sm:px-5 md:px-8 md:py-12" data-reveal>
@@ -152,21 +171,25 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-20 md:px-8 md:py-28" data-reveal>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:gap-8">
-          {[
-            ['inspection', 'home.inspection', 'home.inspectionDesc', 'home.inspectionAlt'],
-            ['warranty', 'home.warranty', 'home.warrantyDesc', 'home.warrantyAlt'],
-            ['delivery', 'home.delivery', 'home.deliveryDesc', 'home.deliveryAlt'],
-          ].map(([imageKey, titleKey, descKey, altKey]) => (
-            <Card key={imageKey} className="gap-0 py-0">
-              <SafeImage src={HOME_IMAGES[imageKey]} alt={t(altKey)} className="h-48 w-full rounded-none object-cover" />
-              <CardHeader>
-                <h3 className="text-lg font-semibold">{t(titleKey)}</h3>
-              </CardHeader>
-              <CardContent className="pb-5">
-                <p className="text-sm leading-relaxed text-muted-foreground">{t(descKey)}</p>
-              </CardContent>
-            </Card>
+        <SectionHeader
+          kicker={t('home.promisesKicker')}
+          title={t('home.promisesTitle')}
+          subtitle={t('home.promisesSubtitle')}
+        />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {promises.map(({ image, icon: Icon, title, desc, alt }, index) => (
+            <article key={image} className={`relative min-h-[22rem] overflow-hidden rounded-xl sm:min-h-[26rem] ${index === 2 ? 'sm:col-span-2 lg:col-span-1' : ''}`}>
+              <SafeImage src={HOME_IMAGES[image]} alt={t(alt)} className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.22_0.02_50_/_0.92)] via-[oklch(0.22_0.02_50_/_0.35)] to-transparent" />
+              <div className="relative z-10 flex h-full min-h-[22rem] flex-col justify-end p-6 sm:min-h-[26rem] sm:p-7">
+                <div className="mb-4 flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-white/70">
+                  <Icon size={14} />
+                  0{index + 1}
+                </div>
+                <h3 className="text-2xl font-semibold tracking-tight text-white">{t(title)}</h3>
+                <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/80">{t(desc)}</p>
+              </div>
+            </article>
           ))}
         </div>
       </section>
