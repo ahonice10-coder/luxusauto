@@ -58,7 +58,7 @@ export function Navbar() {
                   <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>{t('nav.contact')}</Link>
                 </Button>
                 <Button variant="ghost" className="justify-start" asChild>
-                  <Link to="/faq" onClick={() => setMobileMenuOpen(false)}>{t('nav.faq')}</Link>
+                  <Link to="/#faq" onClick={() => setMobileMenuOpen(false)}>{t('nav.faq')}</Link>
                 </Button>
                 {isAuthenticated && !isAdmin ? (
                   <>

@@ -12,7 +12,6 @@ const VehiclesPage = lazy(() => import('../pages/public/VehiclesPage'))
 const VehicleDetailPage = lazy(() => import('../pages/public/VehicleDetailPage'))
 const AboutPage = lazy(() => import('../pages/public/AboutPage'))
 const ContactPage = lazy(() => import('../pages/public/ContactPage'))
-const FaqPage = lazy(() => import('../pages/public/FaqPage'))
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
 const DashboardPage = lazy(() => import('../pages/user/DashboardPage'))
@@ -43,7 +42,7 @@ export function AppRoutes() {
           <Route path="/vehicle/:id" element={<VehicleDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/faq" element={<FaqPage />} />
+          <Route path="/faq" element={<Navigate to="/#faq" replace />} />
           <Route path="/404" element={<NotFound />} />
           <Route element={<UserRoute />}>
             <Route path="/dashboard" element={<DashboardPage />} />

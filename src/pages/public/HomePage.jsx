@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import { ArrowRight, ShieldCheck, Sparkles, CarFront, User, Heart, MessageCircle, CreditCard, Package, Star } from 'lucide-react'
 import { useVehicles } from '../../context/VehicleContext'
 import { useLanguage } from '../../i18n/LanguageContext'
@@ -6,6 +7,7 @@ import { VehicleCard } from '../../components/vehicle/VehicleCard'
 import { Seo } from '../../components/Seo'
 import { SafeImage } from '../../components/SafeImage'
 import { SectionHeader } from '../../components/PageHeader'
+import { FaqAccordion } from '../../components/FaqAccordion'
 import { SITE } from '../../lib/config'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
@@ -21,7 +23,13 @@ const HOME_IMAGES = {
 export default function HomePage() {
   const { vehicles } = useVehicles()
   const { t } = useLanguage()
+  const location = useLocation()
   const featured = vehicles.filter((vehicle) => vehicle.featured).slice(0, 3)
+
+  useEffect(() => {
+    if (location.hash !== '#faq') return
+    document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [location.hash])
 
   const testimonials = [1, 2, 3].map((id) => ({
     id,
@@ -123,26 +131,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-20 md:px-8 md:py-28" data-reveal>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:gap-8">
-          {[
-            ['inspection', 'home.inspection', 'home.inspectionDesc', 'home.inspectionAlt'],
-            ['warranty', 'home.warranty', 'home.warrantyDesc', 'home.warrantyAlt'],
-            ['delivery', 'home.delivery', 'home.deliveryDesc', 'home.deliveryAlt'],
-          ].map(([imageKey, titleKey, descKey, altKey]) => (
-            <Card key={imageKey} className="gap-0 py-0">
-              <SafeImage src={HOME_IMAGES[imageKey]} alt={t(altKey)} className="h-48 w-full rounded-none object-cover" />
-              <CardHeader>
-                <h3 className="text-lg font-semibold">{t(titleKey)}</h3>
-              </CardHeader>
-              <CardContent className="pb-5">
-                <p className="text-sm leading-relaxed text-muted-foreground">{t(descKey)}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       <section className="mx-auto max-w-7xl px-4 py-8 sm:px-5 md:px-8 md:py-12" data-reveal>
         <SectionHeader
           title={t('home.ourSelection')}
@@ -161,6 +149,26 @@ export default function HomePage() {
         <Button variant="ghost" className="mt-8 w-full sm:w-auto md:hidden" asChild>
           <Link to="/vehicles">{t('home.seeAll')}</Link>
         </Button>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-20 md:px-8 md:py-28" data-reveal>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:gap-8">
+          {[
+            ['inspection', 'home.inspection', 'home.inspectionDesc', 'home.inspectionAlt'],
+            ['warranty', 'home.warranty', 'home.warrantyDesc', 'home.warrantyAlt'],
+            ['delivery', 'home.delivery', 'home.deliveryDesc', 'home.deliveryAlt'],
+          ].map(([imageKey, titleKey, descKey, altKey]) => (
+            <Card key={imageKey} className="gap-0 py-0">
+              <SafeImage src={HOME_IMAGES[imageKey]} alt={t(altKey)} className="h-48 w-full rounded-none object-cover" />
+              <CardHeader>
+                <h3 className="text-lg font-semibold">{t(titleKey)}</h3>
+              </CardHeader>
+              <CardContent className="pb-5">
+                <p className="text-sm leading-relaxed text-muted-foreground">{t(descKey)}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-20 md:px-8 md:py-28" data-reveal>
@@ -194,18 +202,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-5 md:px-8 md:pb-32" data-reveal>
-        <Card className="flex flex-col items-stretch justify-between gap-6 p-5 sm:p-6 md:flex-row md:items-center md:gap-8 md:p-10">
-          <div className="max-w-xl">
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">{t('home.faq')}</h2>
-            <p className="mt-3 leading-relaxed text-muted-foreground">{t('home.findAnswers')}</p>
-          </div>
-          <Button size="lg" className="w-full shrink-0 md:w-auto" asChild>
-            <Link to="/faq">
-              {t('home.seeFaq')} <ArrowRight />
-            </Link>
-          </Button>
-        </Card>
+      <section id="faq" className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-8 sm:px-5 md:scroll-mt-28 md:px-8 md:pb-32" data-reveal>
+        <SectionHeader center title={t('home.faq')} subtitle={t('home.findAnswers')} />
+        <div className="mx-auto max-w-3xl">
+          <FaqAccordion />
+        </div>
       </section>
     </div>
   )

@@ -29,7 +29,7 @@ export function Footer() {
           <h3 className="mb-5 text-xs font-medium uppercase tracking-[0.16em] text-foreground">{t('footer.company')}</h3>
           <ul className="space-y-3 text-sm text-muted-foreground">
             <li><Link className="transition-colors hover:text-foreground" to="/about">{t('nav.about')}</Link></li>
-            <li><Link className="transition-colors hover:text-foreground" to="/faq">{t('nav.faq')}</Link></li>
+            <li><Link className="transition-colors hover:text-foreground" to="/#faq">{t('nav.faq')}</Link></li>
             <li><Link className="transition-colors hover:text-foreground" to="/contact">{t('nav.contact')}</Link></li>
           </ul>
         </div>
