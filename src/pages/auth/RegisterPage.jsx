@@ -1,55 +1,114 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { useLanguage } from '../../i18n/LanguageContext'
+import { useToast } from '../../context/ToastContext'
 import { useState } from 'react'
+import { Seo } from '../../components/Seo'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 
 export default function RegisterPage() {
   const navigate = useNavigate()
-  const { register } = useAuth()
+  const { register, isAuthenticated, user } = useAuth()
   const { t } = useLanguage()
-  const [form, setForm] = useState({ name: '', email: '', password: '' })
+  const { toast } = useToast()
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  })
+  const [error, setError] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+
+  if (isAuthenticated) {
+    return (
+      <Navigate to={user?.role === 'admin' ? '/admin' : '/dashboard'} replace />
+    )
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target
     setForm((current) => ({ ...current, [name]: value }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    register(form)
-    navigate('/')
+    if (submitting) return
+    setError('')
+    if (form.password.length < 8) {
+      setError(t('auth.passwordMin'))
+      return
+    }
+    if (form.password !== form.confirmPassword) {
+      setError(t('auth.passwordMismatch'))
+      return
+    }
+    setSubmitting(true)
+    const result = await register(form)
+    setSubmitting(false)
+    if (!result.ok) {
+      const label = t(`auth.${result.error}`)
+      setError(
+        result.detail && result.error === 'serverError'
+          ? `${label} ${result.detail}`
+          : label === `auth.${result.error}` && result.detail
+            ? result.detail
+            : label,
+      )
+      return
+    }
+    toast(t('auth.accountCreated'), 'success')
+    navigate('/dashboard', { replace: true })
   }
 
   return (
-    <div className="flex min-h-[80vh] items-center justify-center px-4 py-20">
-      <div className="w-full max-w-lg rounded-3xl border border-white/10 bg-surface/60 p-8 shadow-glow">
-        <div className="mb-8 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">LuxusAuto</p>
-          <h1 className="mt-2 text-4xl font-black text-text">{t('auth.createAccount')}</h1>
-        </div>
+    <div className="flex min-h-[80vh] items-center justify-center px-5 py-16">
+      <Seo title={t('seo.register')} />
+      <Card className="w-full max-w-md">
+        <CardHeader className="text-center">
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">LuxusAuto</p>
+          <CardTitle className="mt-2 text-3xl">{t('auth.createAccount')}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="register-name">{t('auth.fullName')}</Label>
+              <Input id="register-name" required name="name" value={form.name} onChange={handleChange} type="text" autoComplete="name" className="h-11" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="register-email">{t('auth.email')}</Label>
+              <Input id="register-email" required name="email" value={form.email} onChange={handleChange} type="email" autoComplete="email" className="h-11" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="register-password">{t('auth.password')}</Label>
+              <Input id="register-password" required name="password" value={form.password} onChange={handleChange} type="password" autoComplete="new-password" minLength={8} className="h-11" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="register-confirm">{t('auth.confirmPassword')}</Label>
+              <Input id="register-confirm" required name="confirmPassword" value={form.confirmPassword} onChange={handleChange} type="password" autoComplete="new-password" minLength={8} className="h-11" />
+            </div>
+            {error ? (
+              <Alert variant="destructive">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            ) : null}
+            <Button type="submit" className="w-full" size="lg" disabled={submitting}>
+              {submitting ? t('common.loading') : t('auth.signup')}
+            </Button>
+          </form>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-text-soft">Nom complet</label>
-            <input required name="name" value={form.name} onChange={handleChange} type="text" className="w-full rounded-xl border border-white/10 bg-background px-4 py-3 text-text outline-none focus:border-primary" placeholder="Alex Rossi" />
-          </div>
-          <div>
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-text-soft">Email</label>
-            <input required name="email" value={form.email} onChange={handleChange} type="email" className="w-full rounded-xl border border-white/10 bg-background px-4 py-3 text-text outline-none focus:border-primary" placeholder="nom@example.com" />
-          </div>
-          <div>
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-text-soft">Mot de passe</label>
-            <input required name="password" value={form.password} onChange={handleChange} type="password" className="w-full rounded-xl border border-white/10 bg-background px-4 py-3 text-text outline-none focus:border-primary" placeholder="••••••••" />
-          </div>
-          <button type="submit" className="w-full rounded-xl bg-primary px-4 py-3 text-xs font-bold uppercase tracking-[0.2em] text-[#001452]">
-            S’inscrire
-          </button>
-        </form>
-
-        <p className="mt-6 text-center text-sm text-text-soft">
-          {t('auth.alreadyHave')} <Link to="/login" className="font-semibold text-primary">{t('nav.login')}</Link>
-        </p>
-      </div>
+          <p className="mt-6 text-center text-sm text-muted-foreground">
+            {t('auth.alreadyHave')}{' '}
+            <Link to="/login" className="font-medium text-foreground underline-offset-4 hover:underline">
+              {t('nav.login')}
+            </Link>
+          </p>
+        </CardContent>
+      </Card>
     </div>
   )
 }

@@ -1,30 +1,39 @@
 import { Globe } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
-export function LanguageSwitcher() {
+export function LanguageSwitcher({ id = 'language-switcher', compact = false }) {
   const { language, setLanguage, t } = useLanguage()
 
   const languages = [
-    { code: 'it', name: t('language.italian'), flag: '🇮🇹' },
-    { code: 'en', name: t('language.english'), flag: '🇬🇧' },
-    { code: 'fr', name: t('language.french'), flag: '🇫🇷' },
-    { code: 'de', name: t('language.german'), flag: '🇩🇪' },
+    { code: 'fr', name: t('language.french') },
+    { code: 'en', name: t('language.english') },
+    { code: 'it', name: t('language.italian') },
+    { code: 'de', name: t('language.german') },
   ]
 
   return (
     <div className="flex items-center gap-2">
-      <Globe size={16} className="text-primary" />
-      <select
-        value={language}
-        onChange={(e) => setLanguage(e.target.value)}
-        className="rounded-lg bg-background border border-white/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-text-soft hover:border-primary cursor-pointer focus:border-primary focus:outline-none"
-      >
-        {languages.map((lang) => (
-          <option key={lang.code} value={lang.code}>
-            {lang.flag} {lang.name}
-          </option>
-        ))}
-      </select>
+      {compact ? null : <Globe size={16} className="text-muted-foreground" aria-hidden="true" />}
+      <label className="sr-only" htmlFor={id}>{t('language.label')}</label>
+      <Select value={language} onValueChange={setLanguage}>
+        <SelectTrigger id={id} size="sm" className={compact ? 'min-w-[4.5rem]' : 'min-w-[8rem]'}>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {languages.map((lang) => (
+            <SelectItem key={lang.code} value={lang.code}>
+              {compact ? lang.code.toUpperCase() : lang.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   )
 }

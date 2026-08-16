@@ -1,208 +1,181 @@
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { LogOut, User, Bell, CarFront, LayoutDashboard, Menu, X } from 'lucide-react'
+import { Bell, Heart, LogOut, Menu, User } from 'lucide-react'
 import { useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
+import { useNotifications } from '../../context/NotificationContext'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { LanguageSwitcher } from '../LanguageSwitcher'
+import { SITE } from '../../lib/config'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
 
 export function Navbar() {
-  const { isAuthenticated, logout, user } = useAuth()
+  const { isAuthenticated, logout, isAdmin, user } = useAuth()
+  const { unreadCount } = useNotifications()
   const { t } = useLanguage()
   const navigate = useNavigate()
   const location = useLocation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const isAdmin = user?.role === 'admin'
-
-  const handleReservationLink = () => {
-    if (!isAuthenticated) {
-      navigate('/login', { state: { from: location.pathname } })
-      return
-    }
-    navigate('/reservations')
-  }
-
   const navLinkClass = ({ isActive }) =>
-    `text-xs font-semibold uppercase tracking-[0.18em] transition ${
-      isActive ? 'text-primary' : 'text-text-soft hover:text-primary'
+    `text-sm font-medium transition-colors ${
+      isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
     }`
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-background/70 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-8">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-5 md:h-[72px] md:px-8">
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="rounded-full border border-white/10 p-2 text-text-soft transition hover:border-primary hover:text-primary md:hidden"
-            aria-label="Menu"
-          >
-            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
-          <Link to="/" className="text-xl font-black tracking-tight text-primary">LuxusAuto</Link>
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Menu">
+                <Menu />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[min(100%,20rem)]">
+              <SheetHeader>
+                <SheetTitle>{SITE.name}</SheetTitle>
+              </SheetHeader>
+              <nav className="flex flex-col gap-1 px-4" aria-label="Mobile">
+                <div className="mb-3 sm:hidden">
+                  <LanguageSwitcher id="language-switcher-mobile" />
+                </div>
+                <Button variant="ghost" className="justify-start" asChild>
+                  <Link to="/" onClick={() => setMobileMenuOpen(false)}>{t('nav.home')}</Link>
+                </Button>
+                <Button variant="ghost" className="justify-start" asChild>
+                  <Link to="/vehicles" onClick={() => setMobileMenuOpen(false)}>{t('nav.vehicles')}</Link>
+                </Button>
+                <Button variant="ghost" className="justify-start" asChild>
+                  <Link to="/about" onClick={() => setMobileMenuOpen(false)}>{t('nav.about')}</Link>
+                </Button>
+                <Button variant="ghost" className="justify-start" asChild>
+                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>{t('nav.contact')}</Link>
+                </Button>
+                <Button variant="ghost" className="justify-start" asChild>
+                  <Link to="/faq" onClick={() => setMobileMenuOpen(false)}>{t('nav.faq')}</Link>
+                </Button>
+                {isAuthenticated && !isAdmin ? (
+                  <>
+                    <Separator className="my-3" />
+                    <Button variant="ghost" className="justify-start" asChild>
+                      <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>{t('user.mySpace')}</Link>
+                    </Button>
+                    <Button variant="ghost" className="justify-start" asChild>
+                      <Link to="/reservations" onClick={() => setMobileMenuOpen(false)}>{t('nav.reservations')}</Link>
+                    </Button>
+                    <Button variant="ghost" className="justify-start" asChild>
+                      <Link to="/favorites" onClick={() => setMobileMenuOpen(false)}>{t('nav.favorites')}</Link>
+                    </Button>
+                  </>
+                ) : null}
+                {isAdmin ? (
+                  <Button variant="ghost" className="justify-start" asChild>
+                    <Link to="/admin" onClick={() => setMobileMenuOpen(false)}>{t('nav.management')}</Link>
+                  </Button>
+                ) : null}
+                {!isAuthenticated ? (
+                  <>
+                    <Separator className="my-3" />
+                    <Button variant="ghost" className="justify-start" asChild>
+                      <Link to="/login" onClick={() => setMobileMenuOpen(false)}>{t('nav.login')}</Link>
+                    </Button>
+                    <Button className="mt-1" asChild>
+                      <Link to="/register" onClick={() => setMobileMenuOpen(false)}>{t('nav.createAccount')}</Link>
+                    </Button>
+                  </>
+                ) : null}
+              </nav>
+            </SheetContent>
+          </Sheet>
+          <Link to="/" className="font-display text-lg font-semibold tracking-tight text-foreground md:text-xl">
+            {SITE.name}
+          </Link>
         </div>
 
-        <nav className="hidden items-center gap-6 md:flex">
-          <NavLink to="/" className={navLinkClass}>{t('nav.home')}</NavLink>
-          <NavLink to="/vehicles/new" className={navLinkClass}>{t('nav.new')}</NavLink>
-          <NavLink to="/vehicles/used" className={navLinkClass}>{t('nav.used')}</NavLink>
-          <button type="button" onClick={handleReservationLink} className="text-xs font-semibold uppercase tracking-[0.18em] text-text-soft transition hover:text-primary">
-            {t('nav.reservations')}
-          </button>
-          <NavLink to="/notifications" className={navLinkClass}>{t('nav.notifications')}</NavLink>
-          <NavLink to="/profile" className={navLinkClass}>{t('nav.profile')}</NavLink>
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Principal">
+          <NavLink to="/" end className={navLinkClass}>{t('nav.home')}</NavLink>
+          <NavLink
+            to="/vehicles"
+            className={({ isActive }) =>
+              navLinkClass({ isActive: isActive || location.pathname.startsWith('/vehicle/') })
+            }
+          >
+            {t('nav.vehicles')}
+          </NavLink>
+          <NavLink to="/about" className={navLinkClass}>{t('nav.about')}</NavLink>
+          <NavLink to="/contact" className={navLinkClass}>{t('nav.contact')}</NavLink>
         </nav>
 
-        <div className="flex items-center gap-3">
-          <LanguageSwitcher />
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="hidden sm:block">
+            <LanguageSwitcher id="language-switcher-desktop" compact />
+          </div>
           {!isAuthenticated ? (
             <>
-              <Link to="/login" className="hidden rounded border border-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-text-soft hover:border-primary hover:text-primary sm:inline-flex">
-                {t('nav.login')}
-              </Link>
-              <Link to="/register" className="inline-flex rounded bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#001452] shadow-glow transition hover:brightness-110">
-                {t('nav.createAccount')}
-              </Link>
+              <Button variant="ghost" size="sm" className="hidden sm:inline-flex" asChild>
+                <Link to="/login">{t('nav.login')}</Link>
+              </Button>
+              <Button size="sm" asChild>
+                <Link to="/register">{t('nav.createAccount')}</Link>
+              </Button>
+            </>
+          ) : isAdmin ? (
+            <>
+              <Button variant="outline" size="sm" className="hidden sm:inline-flex" asChild>
+                <NavLink to="/admin">{t('nav.management')}</NavLink>
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                aria-label={t('nav.logout')}
+                onClick={() => { logout(); navigate('/login') }}
+              >
+                <LogOut />
+              </Button>
             </>
           ) : (
             <>
-              {isAdmin ? (
-                <>
-                  <NavLink to="/admin/vehicles" className="hidden items-center gap-2 rounded border border-white/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-text-soft hover:border-primary hover:text-primary sm:inline-flex">
-                    <CarFront size={14} /> {t('nav.management')}
-                  </NavLink>
-                  <NavLink to="/admin/reservations" className="hidden items-center gap-2 rounded border border-white/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-text-soft hover:border-primary hover:text-primary sm:inline-flex">
-                    <Bell size={14} /> {t('nav.reservations')}
-                  </NavLink>
-                </>
-              ) : (
-                <>
-                  <NavLink to="/profile" className="hidden items-center gap-2 rounded border border-white/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-text-soft hover:border-primary hover:text-primary sm:inline-flex">
-                    <User size={14} /> {t('nav.profile')}
-                  </NavLink>
-                  <NavLink to="/favorites" className="hidden items-center gap-2 rounded border border-white/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-text-soft hover:border-primary hover:text-primary sm:inline-flex">
-                    <Bell size={14} /> {t('nav.notifications')}
-                  </NavLink>
-                </>
-              )}
-              <button
+              <Button variant="ghost" size="icon" className="hidden sm:inline-flex" asChild>
+                <NavLink to="/favorites" aria-label={t('nav.favorites')}>
+                  <Heart />
+                </NavLink>
+              </Button>
+              <Button variant="ghost" size="icon" className="relative hidden sm:inline-flex" asChild>
+                <NavLink to="/notifications" aria-label={t('nav.notifications')}>
+                  <Bell />
+                  {unreadCount > 0 ? (
+                    <Badge className="absolute -right-0.5 -top-0.5 h-2 w-2 p-0" />
+                  ) : null}
+                </NavLink>
+              </Button>
+              <Button variant="ghost" size="icon" className="hidden sm:inline-flex" asChild>
+                <NavLink to="/dashboard" aria-label={t('nav.profile')} title={user?.name}>
+                  <User />
+                </NavLink>
+              </Button>
+              <Button
                 type="button"
+                variant="ghost"
+                size="icon"
+                aria-label={t('nav.logout')}
                 onClick={() => { logout(); navigate('/login') }}
-                className="inline-flex items-center gap-2 rounded border border-white/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-text-soft hover:border-primary hover:text-primary"
               >
-                <LogOut size={14} /> {t('nav.logout')}
-              </button>
+                <LogOut />
+              </Button>
             </>
           )}
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="border-t border-white/10 bg-background/95 backdrop-blur-xl md:hidden">
-          <nav className="mx-auto max-w-7xl space-y-3 px-4 py-4">
-            <div className="pb-4">
-              <LanguageSwitcher />
-            </div>
-            <Link
-              to="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-soft hover:text-primary transition"
-            >
-              {t('nav.home')}
-            </Link>
-            <Link
-              to="/vehicles/new"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-soft hover:text-primary transition"
-            >
-              {t('nav.new')}
-            </Link>
-            <Link
-              to="/vehicles/used"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-soft hover:text-primary transition"
-            >
-              {t('nav.used')}
-            </Link>
-            <button
-              type="button"
-              onClick={() => {
-                handleReservationLink()
-                setMobileMenuOpen(false)
-              }}
-              className="block w-full py-2 text-left text-xs font-semibold uppercase tracking-[0.18em] text-text-soft hover:text-primary transition"
-            >
-              {t('nav.reservations')}
-            </button>
-            <Link
-              to="/notifications"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-soft hover:text-primary transition"
-            >
-              {t('nav.notifications')}
-            </Link>
-            <Link
-              to="/profile"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-soft hover:text-primary transition"
-            >
-              {t('nav.profile')}
-            </Link>
-
-            {isAuthenticated && isAdmin && (
-              <>
-                <Link
-                  to="/admin/vehicles"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary font-bold"
-                >
-                  {t('nav.management')}
-                </Link>
-                <Link
-                  to="/admin/reservations"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-soft hover:text-primary transition"
-                >
-                  {t('nav.reservations')}
-                </Link>
-              </>
-            )}
-
-            <div className="border-t border-white/10 pt-4">
-              {!isAuthenticated ? (
-                <>
-                  <Link
-                    to="/login"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-soft hover:text-primary transition"
-                  >
-                    {t('nav.login')}
-                  </Link>
-                  <Link
-                    to="/register"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="mt-2 block rounded bg-primary px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.16em] text-[#001452] transition hover:brightness-110"
-                  >
-                    {t('nav.createAccount')}
-                  </Link>
-                </>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => {
-                    logout()
-                    setMobileMenuOpen(false)
-                    navigate('/login')
-                  }}
-                  className="flex items-center gap-2 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-soft hover:text-primary transition"
-                >
-                  <LogOut size={14} /> {t('nav.logout')}
-                </button>
-              )}
-            </div>
-          </nav>
-        </div>
-      )}
     </header>
   )
 }

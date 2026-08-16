@@ -1,29 +1,30 @@
-import { createContext, useContext, useState, useMemo } from 'react'
-import { translations } from './translations'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { readStorage, STORAGE_KEYS, writeStorage } from '../lib/storage'
+import { SUPPORTED_LANGUAGES, translations } from './translations'
+import { translate } from './translate'
 
 const LanguageContext = createContext(null)
 
 export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState('it') // Défaut: Italien
+  const [language, setLanguageState] = useState(() => {
+    const saved = readStorage(STORAGE_KEYS.language, 'fr')
+    return SUPPORTED_LANGUAGES.includes(saved) ? saved : 'fr'
+  })
 
-  const t = (path) => {
-    const keys = path.split('.')
-    let value = translations[language]
-    
-    for (const key of keys) {
-      if (value && typeof value === 'object') {
-        value = value[key]
-      } else {
-        return path // Retourner le chemin si la traduction n'existe pas
-      }
-    }
-    
-    return value || path
-  }
+  useEffect(() => {
+    writeStorage(STORAGE_KEYS.language, language)
+    document.documentElement.lang = language
+  }, [language])
+
+  const setLanguage = useCallback((next) => {
+    if (SUPPORTED_LANGUAGES.includes(next)) setLanguageState(next)
+  }, [])
+
+  const t = useCallback((path) => translate(translations, language, path), [language])
 
   const value = useMemo(
     () => ({ language, setLanguage, t }),
-    [language],
+    [language, setLanguage, t],
   )
 
   return (

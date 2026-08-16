@@ -1,13 +1,13 @@
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { Navigate } from 'react-router-dom'
 
-export function UserRoute({ children }) {
+export function UserRoute() {
   const { user, isAuthenticated } = useAuth()
+  const location = useLocation()
 
-  // Si l'utilisateur n'est pas authentifié ou s'il est admin, rediriger
-  if (!isAuthenticated || !user || user.role === 'admin') {
-    return <Navigate to="/login" />
+  if (!isAuthenticated || !user) {
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />
   }
 
-  return children
+  return <Outlet />
 }

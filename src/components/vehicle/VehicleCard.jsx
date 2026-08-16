@@ -1,74 +1,93 @@
 import { Heart, ArrowRight } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import { useFavorites } from '../../context/FavoritesContext'
+import { useToast } from '../../context/ToastContext'
+import { useLanguage } from '../../i18n/LanguageContext'
+import { formatPrice } from '../../lib/config'
+import { getVehicleImages } from '../../lib/vehicleMedia'
+import { VehicleImageSlider } from './VehicleImageSlider'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
 export function VehicleCard({ vehicle }) {
   const navigate = useNavigate()
   const { isAuthenticated } = useAuth()
+  const { isFavorite, toggleFavorite } = useFavorites()
+  const { toast } = useToast()
+  const { t, language } = useLanguage()
+  const locale = language === 'en' ? 'en-GB' : `${language}-${language.toUpperCase()}`
+  const favorite = isFavorite(vehicle.id)
+  const images = getVehicleImages(vehicle)
 
   const handleFavorite = (event) => {
+    event.preventDefault()
     event.stopPropagation()
     if (!isAuthenticated) {
       navigate('/login', { state: { from: `/vehicle/${vehicle.id}` } })
       return
     }
-    alert(`Véhicule ajouté aux favoris : ${vehicle.name}`)
+    toggleFavorite(vehicle.id)
+    toast(favorite ? t('vehicle.removeFavorite') : t('vehicle.addFavorite'), 'success')
   }
 
   return (
-    <article
-      onClick={() => navigate(`/vehicle/${vehicle.id}`)}
-      className="card-hover glass-panel group overflow-hidden rounded-2xl transition duration-300"
-    >
+    <Card className="card-hover gap-0 py-0">
       <div className="relative overflow-hidden">
-        <img src={vehicle.image} alt={vehicle.name} className="h-64 w-full object-cover transition duration-500 group-hover:scale-105" />
-        <button
+        <Link to={`/vehicle/${vehicle.id}`} className="block">
+          <VehicleImageSlider
+            images={images}
+            alt={vehicle.name}
+            interval={3000}
+            className="h-64 w-full"
+          />
+        </Link>
+        <Button
           type="button"
+          variant="secondary"
+          size="icon-sm"
           onClick={handleFavorite}
-          className="absolute right-3 top-3 rounded-full border border-white/10 bg-background/60 p-2 text-text-soft transition hover:border-primary hover:text-primary"
-          aria-label="Ajouter aux favoris"
+          className="absolute right-3 top-3 z-20"
+          aria-label={favorite ? t('vehicle.removeFavorite') : t('vehicle.addFavorite')}
+          aria-pressed={favorite}
         >
-          <Heart size={16} />
-        </button>
-        {vehicle.featured && (
-          <div className="absolute left-3 top-3 rounded-full bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[#001452]">
-            Nouveauté
-          </div>
-        )}
+          <Heart className={favorite ? 'fill-foreground' : ''} />
+        </Button>
+        {vehicle.featured ? (
+          <Badge className="absolute left-3 top-3 z-20">{t('vehicle.featured')}</Badge>
+        ) : null}
       </div>
 
-      <div className="space-y-4 p-5">
-        <div className="flex items-start justify-between gap-3">
+      <CardHeader className="pt-5">
+        <div className="flex items-start justify-between gap-4">
           <div>
-            <h3 className="text-2xl font-semibold text-text">{vehicle.name}</h3>
-            <p className="text-sm text-text-soft">{vehicle.engine} • {vehicle.year}</p>
+            <CardTitle className="text-lg">
+              <Link to={`/vehicle/${vehicle.id}`} className="hover:underline">{vehicle.name}</Link>
+            </CardTitle>
+            <p className="mt-1 text-sm text-muted-foreground">{vehicle.engine} • {vehicle.year}</p>
           </div>
-          <span className="text-lg font-bold text-primary">{vehicle.price.toLocaleString('fr-FR')} €</span>
+          <span className="shrink-0 text-sm font-semibold text-gold">{formatPrice(vehicle.price, locale)}</span>
         </div>
+      </CardHeader>
 
-        <div className="grid grid-cols-2 gap-3 border-y border-border/50 py-3 text-xs uppercase tracking-[0.14em] text-text-soft">
-          <span>{vehicle.power}</span>
-          <span>{vehicle.transmission}</span>
-          <span>{vehicle.mileage.toLocaleString('fr-FR')} km</span>
-          <span>{vehicle.location}</span>
-        </div>
+      <CardContent className="grid grid-cols-2 gap-x-4 gap-y-2 border-y py-4 text-xs text-muted-foreground">
+        <span>{vehicle.power}</span>
+        <span>{vehicle.transmission}</span>
+        <span>{Number(vehicle.mileage || 0).toLocaleString(locale)} km</span>
+        <span>{vehicle.location}</span>
+      </CardContent>
 
-        <div className="flex items-center justify-between">
-          <Link to={`/vehicle/${vehicle.id}`} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-white">
-            Voir le véhicule <ArrowRight size={15} />
+      <CardFooter className="justify-between bg-transparent">
+        <Button variant="link" className="px-0" asChild>
+          <Link to={`/vehicle/${vehicle.id}`}>
+            {t('vehicle.seeVehicle')} <ArrowRight />
           </Link>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              navigate(`/vehicle/${vehicle.id}`)
-            }}
-            className="rounded-lg bg-primary px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#001452] hover:brightness-110"
-          >
-            Réserver
-          </button>
-        </div>
-      </div>
-    </article>
+        </Button>
+        <Button size="sm" asChild>
+          <Link to={`/vehicle/${vehicle.id}`}>{t('vehicle.reserve')}</Link>
+        </Button>
+      </CardFooter>
+    </Card>
   )
 }

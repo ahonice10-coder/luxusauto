@@ -13,6 +13,11 @@ export const vehiclesSeed = [
     location: 'Paris',
     status: 'new',
     image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=1200&q=80',
+    ],
     featured: true,
     specs: ['0-100: 3.2s', 'Top speed: 296 km/h', 'AWD'],
     description: 'Un sport automobile d’exception, ultra précis et ultra performant.'
@@ -31,6 +36,11 @@ export const vehiclesSeed = [
     location: 'Lyon',
     status: 'used',
     image: 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=1200&q=80',
+    ],
     featured: false,
     specs: ['0-100: 3.3s', 'Traction intégrale', 'M xDrive'],
     description: 'Berline sportive haut de gamme, élégante et massive.'
@@ -49,6 +59,11 @@ export const vehiclesSeed = [
     location: 'Marseille',
     status: 'used',
     image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1606664515524-ed2f786a0fe6?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&w=1200&q=80',
+    ],
     featured: false,
     specs: ['0-100: 3.4s', 'Quattro', 'Grand volume'],
     description: 'Performances de supercar dans un break premium.'
@@ -67,6 +82,11 @@ export const vehiclesSeed = [
     location: 'Nice',
     status: 'new',
     image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=1200&q=80',
+    ],
     featured: true,
     specs: ['0-100: 3.6s', 'RWD', 'Launch Control'],
     description: 'Grand tourer de luxe, à l’équilibre irréprochable.'
@@ -85,6 +105,11 @@ export const vehiclesSeed = [
     location: 'Bordeaux',
     status: 'new',
     image: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1606664515524-ed2f786a0fe6?auto=format&fit=crop&w=1200&q=80',
+    ],
     featured: false,
     specs: ['0-100: 4.5s', '4x4', 'Luxury Pack'],
     description: 'SUV premium avec confort de grand standing.'
@@ -103,6 +128,11 @@ export const vehiclesSeed = [
     location: 'Strasbourg',
     status: 'new',
     image: 'https://images.unsplash.com/photo-1560958089-b8a58cb6785b?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1560958089-b8a58cb6785b?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80',
+    ],
     featured: false,
     specs: ['0-100: 2.1s', 'Autonomie 650 km', 'AWD'],
     description: 'Electric performance with a futuristic cabin.'

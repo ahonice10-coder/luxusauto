@@ -1,53 +1,117 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { useLanguage } from '../../i18n/LanguageContext'
+import { useToast } from '../../context/ToastContext'
 import { useState } from 'react'
+import { Seo } from '../../components/Seo'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 
 export default function LoginPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { login } = useAuth()
+  const { login, isAuthenticated, user } = useAuth()
   const { t } = useLanguage()
+  const { toast } = useToast()
   const [form, setForm] = useState({ email: '', password: '' })
+  const [error, setError] = useState('')
+  const [lockAutofill, setLockAutofill] = useState(true)
+
+  if (isAuthenticated) {
+    const fallback = user?.role === 'admin' ? '/admin' : '/dashboard'
+    return <Navigate to={location.state?.from || fallback} replace />
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target
     setForm((current) => ({ ...current, [name]: value }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    login(form)
-    const from = location.state?.from || '/dashboard'
-    navigate(from, { replace: true })
+    setError('')
+    const result = await login(form)
+    if (!result.ok) {
+      setError(t(`auth.${result.error}`))
+      return
+    }
+    toast(t('auth.signedIn'), 'success')
+    const fallback = result.user.role === 'admin' ? '/admin' : '/dashboard'
+    navigate(location.state?.from || fallback, { replace: true })
   }
 
+  const unlock = () => setLockAutofill(false)
+
   return (
-    <div className="flex min-h-[80vh] items-center justify-center px-4 py-20">
-      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-surface/60 p-8 shadow-glow">
-        <div className="mb-8 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">LuxusAuto</p>
-          <h1 className="mt-2 text-4xl font-black text-text">{t('nav.login')}</h1>
-        </div>
+    <div className="flex min-h-[80vh] items-center justify-center px-5 py-16">
+      <Seo title={t('seo.login')} />
+      <Card className="w-full max-w-md">
+        <CardHeader className="text-center">
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">LuxusAuto</p>
+          <CardTitle className="mt-2 text-3xl">{t('nav.login')}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} autoComplete="off" className="space-y-5">
+            <div className="space-y-2">
+              <Label htmlFor="login-email">{t('auth.email')}</Label>
+              <Input
+                id="login-email"
+                required
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                onFocus={unlock}
+                type="text"
+                inputMode="email"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="none"
+                spellCheck="false"
+                readOnly={lockAutofill}
+                data-lpignore="true"
+                data-1p-ignore="true"
+                className="h-11"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="login-password">{t('auth.password')}</Label>
+              <Input
+                id="login-password"
+                required
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                onFocus={unlock}
+                type="password"
+                autoComplete="new-password"
+                readOnly={lockAutofill}
+                data-lpignore="true"
+                data-1p-ignore="true"
+                className="h-11"
+              />
+            </div>
+            {error ? (
+              <Alert variant="destructive">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            ) : null}
+            <Button type="submit" className="w-full" size="lg">{t('auth.signin')}</Button>
+          </form>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-text-soft">{t('auth.email')}</label>
-            <input required name="email" value={form.email} onChange={handleChange} type="email" className="w-full rounded-xl border border-white/10 bg-background px-4 py-3 text-text outline-none focus:border-primary" placeholder="nom@example.com" />
-          </div>
-          <div>
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-text-soft">{t('auth.password')}</label>
-            <input required name="password" value={form.password} onChange={handleChange} type="password" className="w-full rounded-xl border border-white/10 bg-background px-4 py-3 text-text outline-none focus:border-primary" placeholder="••••••••" />
-          </div>
-          <button type="submit" className="w-full rounded-xl bg-primary px-4 py-3 text-xs font-bold uppercase tracking-[0.2em] text-[#001452]">
-            {t('auth.signin')}
-          </button>
-        </form>
-
-        <p className="mt-6 text-center text-sm text-text-soft">
-          {t('auth.noAccount')} <Link to="/register" className="font-semibold text-primary">{t('auth.createAccount')}</Link>
-        </p>
-      </div>
+          <p className="mt-6 text-center text-sm text-muted-foreground">
+            {t('auth.noAccount')}{' '}
+            <Link to="/register" className="font-medium text-foreground underline-offset-4 hover:underline">
+              {t('auth.createAccount')}
+            </Link>
+          </p>
+          <p className="mt-3 text-center text-xs text-muted-foreground">
+            <Link to="/admin/login" className="hover:text-foreground">{t('auth.adminSpace')}</Link>
+          </p>
+        </CardContent>
+      </Card>
     </div>
   )
 }
